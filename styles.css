@@ -872,6 +872,24 @@ button {
   font-size: 12px;
 }
 
+.evidence-action {
+  width: max-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 9px;
+  padding-bottom: 2px;
+  color: var(--blue);
+  border-bottom: 1px solid currentColor;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.evidence-action svg {
+  width: 14px;
+  height: 14px;
+}
+
 .results {
   display: grid;
   grid-template-columns: 1fr 1.25fr;

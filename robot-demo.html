@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="垃圾拾取机器人前端交互体验，模拟状态监控、地图导航、区域清扫、视觉识别与操作日志。"
+    />
+    <title>机器人前端体验 | 刘佳鑫作品集</title>
+    <link rel="stylesheet" href="robot-demo.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="demo-shell">
+      <aside class="sidebar">
+        <div class="brand-mark">
+          <div class="brand-icon"><i class="fa-solid fa-robot"></i></div>
+          <div>
+            <p class="brand-title">清洁机器人一号</p>
+            <p class="brand-type">垃圾拾取机器人</p>
+          </div>
+        </div>
+
+        <nav class="nav-stack" aria-label="机器人前端功能">
+          <button class="nav-link active" type="button" data-view="home">
+            <i class="fa-solid fa-gauge-high"></i><span>首页</span>
+          </button>
+          <button class="nav-link" type="button" data-view="map">
+            <i class="fa-solid fa-route"></i><span>地图</span>
+          </button>
+          <button class="nav-link" type="button" data-view="monitor">
+            <i class="fa-solid fa-video"></i><span>监控</span>
+          </button>
+          <button class="nav-link" type="button" data-view="logs">
+            <i class="fa-solid fa-clock-rotate-left"></i><span>日志</span>
+          </button>
+        </nav>
+
+        <div class="side-section">
+          <p class="side-label">硬件</p>
+          <ul class="hardware-list">
+            <li><span>激光雷达</span><span class="status-pill dark">ROS</span></li>
+            <li><span>D435 相机</span><span class="status-pill dark">ROS</span></li>
+            <li><span>IMU</span><span class="status-pill dark">ROS</span></li>
+            <li><span>STM32</span><span class="status-pill dark">串口</span></li>
+          </ul>
+        </div>
+
+        <div class="side-section connection-section">
+          <p class="side-label">连接状态</p>
+          <ul class="state-list">
+            <li><span>运行模式</span><span class="status-pill ok">体验模式</span></li>
+            <li><span>ROS2</span><span class="status-pill ok">模拟连接</span></li>
+          </ul>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <a class="back-link" href="index.html#work">
+            <i class="fa-solid fa-arrow-left"></i><span>返回作品集</span>
+          </a>
+          <div class="demo-state">
+            <span class="live-dot"></span>
+            <span>交互演示</span>
+            <time id="current-time"></time>
+          </div>
+        </header>
+
+        <section class="view active" data-view-panel="home">
+          <div class="page-head">
+            <div>
+              <p class="eyebrow">ROBOT CONTROL / DEMO</p>
+              <h1>机器人运行首页</h1>
+              <p>体验运行状态、电量、垃圾桶容量和基础控制命令。</p>
+            </div>
+            <span class="demo-badge">模拟数据 · 不连接实机</span>
+          </div>
+
+          <div class="home-grid">
+            <article class="panel status-card">
+              <div class="panel-head">
+                <span><i class="fa-solid fa-circle-play"></i>工作状态</span>
+                <span class="status-pill ok" id="mode-pill">ROS2</span>
+              </div>
+              <div class="panel-body status-display">
+                <div class="robot-face"><i class="fa-solid fa-robot"></i></div>
+                <div>
+                  <strong class="metric-value" id="robot-status">待机</strong>
+                  <span class="metric-label">当前状态</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="panel battery-card">
+              <div class="panel-head">
+                <span><i class="fa-solid fa-battery-full"></i>电量</span>
+                <span class="status-pill dark">实时模拟</span>
+              </div>
+              <div class="panel-body battery-readout">
+                <div>
+                  <strong class="metric-value"><span id="battery-level">96</span>%</strong>
+                  <span class="metric-label">当前电量</span>
+                </div>
+                <div class="battery-shell" aria-label="机器人剩余电量">
+                  <div class="battery-fill" id="battery-fill"></div>
+                </div>
+              </div>
+            </article>
+
+            <article class="panel bin-card">
+              <div class="panel-head">
+                <span><i class="fa-solid fa-trash-can"></i>左侧垃圾桶</span>
+                <span class="status-pill dark">可回收物</span>
+              </div>
+              <div class="panel-body bin-meter">
+                <div class="bin-tank">
+                  <div class="bin-fill left" id="left-bin-fill"></div>
+                </div>
+                <div>
+                  <strong class="metric-value"><span id="left-bin">18</span>%</strong>
+                  <span class="metric-label">占用空间比例</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="panel bin-card">
+              <div class="panel-head">
+                <span><i class="fa-solid fa-trash-can"></i>右侧垃圾桶</span>
+                <span class="status-pill dark">普通垃圾</span>
+              </div>
+              <div class="panel-body bin-meter">
+                <div class="bin-tank">
+                  <div class="bin-fill right" id="right-bin-fill"></div>
+                </div>
+                <div>
+                  <strong class="metric-value"><span id="right-bin">11</span>%</strong>
+                  <span class="metric-label">占用空间比例</span>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <section class="panel command-panel">
+            <div class="panel-head">
+              <span><i class="fa-solid fa-keyboard"></i>任务命令</span>
+              <span class="panel-note">点击按钮查看状态联动</span>
+            </div>
+            <div class="command-grid">
+              <button class="command-button secondary" type="button" data-command="standby">
+                <i class="fa-solid fa-pause"></i><span>待机</span>
+              </button>
+              <button class="command-button success" type="button" id="clean-toggle">
+                <i class="fa-solid fa-play"></i><span>启动清扫工作</span>
+              </button>
+              <button class="command-button warning" type="button" data-dump="left">
+                <i class="fa-solid fa-dumpster"></i><span>卸载桶 1</span>
+              </button>
+              <button class="command-button warning" type="button" data-dump="right">
+                <i class="fa-solid fa-dumpster-fire"></i><span>卸载桶 2</span>
+              </button>
+            </div>
+          </section>
+        </section>
+
+        <section class="view" data-view-panel="map">
+          <div class="page-head">
+            <div>
+              <p class="eyebrow">NAV2 / REGION TASK</p>
+              <h1>地图导航</h1>
+              <p>点击目标点、拖拽清扫区域，并模拟机器人执行导航任务。</p>
+            </div>
+            <span class="status-pill ok" id="nav-state">导航就绪</span>
+          </div>
+
+          <div class="map-layout">
+            <section class="panel map-panel">
+              <div class="panel-head map-toolbar">
+                <span><i class="fa-solid fa-map"></i>办公区地图</span>
+                <div class="tool-segments" aria-label="地图操作模式">
+                  <button class="tool-button active" type="button" data-map-mode="goal">
+                    <i class="fa-solid fa-location-dot"></i><span>目标点</span>
+                  </button>
+                  <button class="tool-button" type="button" data-map-mode="region">
+                    <i class="fa-solid fa-vector-square"></i><span>清扫区域</span>
+                  </button>
+                  <button class="tool-button" type="button" data-map-mode="dump">
+                    <i class="fa-solid fa-dumpster"></i><span>卸载区</span>
+                  </button>
+                </div>
+              </div>
+              <div class="map-stage" id="map-stage">
+                <canvas id="map-canvas"></canvas>
+                <div class="map-legend">
+                  <span><i class="legend-dot robot"></i>机器人</span>
+                  <span><i class="legend-dot goal"></i>导航目标</span>
+                  <span><i class="legend-box region"></i>清扫区域</span>
+                  <span><i class="legend-box dump"></i>卸载区域</span>
+                </div>
+              </div>
+            </section>
+
+            <aside class="task-panel">
+              <section class="panel task-card">
+                <div class="panel-head"><span><i class="fa-solid fa-list-check"></i>当前任务</span></div>
+                <div class="task-content">
+                  <div class="task-row"><span>模式</span><strong id="task-mode">目标点导航</strong></div>
+                  <div class="task-row"><span>目标</span><strong id="task-target">尚未设置</strong></div>
+                  <div class="task-row"><span>区域</span><strong id="task-region">区域 1、区域 2</strong></div>
+                  <div class="task-row"><span>速度</span><strong id="task-speed">0.00 m/s</strong></div>
+                </div>
+              </section>
+              <button class="primary-action" id="execute-task" type="button">
+                <i class="fa-solid fa-play"></i><span>执行当前任务</span>
+              </button>
+              <button class="outline-action" id="reset-map" type="button">
+                <i class="fa-solid fa-rotate-left"></i><span>重置演示地图</span>
+              </button>
+              <p class="interaction-hint" id="interaction-hint">
+                在地图空白区域点击，设置机器人导航目标。
+              </p>
+            </aside>
+          </div>
+        </section>
+
+        <section class="view" data-view-panel="monitor">
+          <div class="page-head">
+            <div>
+              <p class="eyebrow">YOLOV8-SEG / D435</p>
+              <h1>视觉监控</h1>
+              <p>模拟实例分割、目标分类和深度定位结果。</p>
+            </div>
+            <span class="status-pill ok"><span class="live-dot"></span>推理运行中</span>
+          </div>
+
+          <div class="monitor-layout">
+            <section class="panel vision-panel">
+              <div class="panel-head">
+                <span><i class="fa-solid fa-camera"></i>目标识别画面</span>
+                <span class="panel-note"><span id="monitor-fps">18.6</span> FPS</span>
+              </div>
+              <div class="vision-frame">
+                <img
+                  src="assets/images/trash-segmentation.webp"
+                  alt="YOLOv8-seg 垃圾目标实例分割画面"
+                />
+                <span class="detection-tag tag-one">纸张 0.92 · 0.74m</span>
+                <span class="detection-tag tag-two">瓶子 0.88 · 1.12m</span>
+                <div class="scan-line"></div>
+              </div>
+            </section>
+
+            <aside class="detection-column">
+              <section class="panel detection-panel">
+                <div class="panel-head"><span><i class="fa-solid fa-crosshairs"></i>识别结果</span></div>
+                <div class="detection-list">
+                  <div><span class="class-swatch blue"></span><strong>纸张</strong><span>92%</span></div>
+                  <div><span class="class-swatch green"></span><strong>瓶子</strong><span>88%</span></div>
+                  <div><span class="class-swatch yellow"></span><strong>USB</strong><span>81%</span></div>
+                </div>
+              </section>
+              <section class="panel inference-panel">
+                <div class="panel-head"><span><i class="fa-solid fa-microchip"></i>推理状态</span></div>
+                <div class="inference-grid">
+                  <div><span>模型</span><strong>YOLOv8-seg</strong></div>
+                  <div><span>设备</span><strong>OpenVINO CPU</strong></div>
+                  <div><span>深度相机</span><strong>D435 在线</strong></div>
+                  <div><span>置信度阈值</span><strong>0.55</strong></div>
+                </div>
+              </section>
+            </aside>
+          </div>
+        </section>
+
+        <section class="view" data-view-panel="logs">
+          <div class="page-head">
+            <div>
+              <p class="eyebrow">TASK HISTORY / EVENT STREAM</p>
+              <h1>操作日志</h1>
+              <p>查看本次体验中触发的命令、导航与卸载事件。</p>
+            </div>
+            <button class="outline-action compact" id="clear-logs" type="button">
+              <i class="fa-solid fa-trash"></i><span>清空日志</span>
+            </button>
+          </div>
+
+          <section class="panel log-panel">
+            <div class="log-toolbar">
+              <label>
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input id="log-search" type="search" placeholder="搜索任务、状态或详情" />
+              </label>
+              <span class="status-pill ok">浏览器内存</span>
+            </div>
+            <div class="table-scroll">
+              <table>
+                <thead>
+                  <tr>
+                    <th>时间</th>
+                    <th>类型</th>
+                    <th>状态</th>
+                    <th>详情</th>
+                  </tr>
+                </thead>
+                <tbody id="log-body"></tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="robot-demo.js"></script>
+  </body>
+</html>
