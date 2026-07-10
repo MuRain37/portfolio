@@ -1411,6 +1411,7 @@ button {
   align-items: center;
   justify-self: center;
   gap: 18px;
+  white-space: nowrap;
 }
 
 .footer-center p {
@@ -1419,11 +1420,14 @@ button {
 }
 
 .footer-easter-egg {
+  flex: 0 0 auto;
+  min-width: max-content;
   width: auto;
   height: auto;
   display: inline-flex;
   align-items: center;
   gap: 7px;
+  white-space: nowrap;
   color: rgba(255, 255, 255, 0.42);
   border: 0;
   transition: color 160ms ease;
