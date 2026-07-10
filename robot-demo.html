@@ -232,35 +232,34 @@
             <div>
               <p class="eyebrow">YOLOV8-SEG / D435</p>
               <h1>视觉监控</h1>
-              <p>模拟实例分割、目标分类和深度定位结果。</p>
+              <p>展示 ROS2 视觉节点连接状态与图像话题信息。</p>
             </div>
-            <span class="status-pill ok"><span class="live-dot"></span>推理运行中</span>
+            <span class="status-pill warn"><i class="fa-solid fa-link-slash"></i>相机离线</span>
           </div>
 
           <div class="monitor-layout">
             <section class="panel vision-panel">
               <div class="panel-head">
                 <span><i class="fa-solid fa-camera"></i>目标识别画面</span>
-                <span class="panel-note"><span id="monitor-fps">18.6</span> FPS</span>
+                <span class="status-pill warn">无信号</span>
               </div>
               <div class="vision-frame">
-                <img
-                  src="assets/images/trash-segmentation.webp"
-                  alt="YOLOv8-seg 垃圾目标实例分割画面"
-                />
-                <span class="detection-tag tag-one">纸张 0.92 · 0.74m</span>
-                <span class="detection-tag tag-two">瓶子 0.88 · 1.12m</span>
-                <div class="scan-line"></div>
+                <div class="no-signal">
+                  <div class="no-signal-icon"><i class="fa-solid fa-video-slash"></i></div>
+                  <strong>摄像头无信号</strong>
+                  <p>等待 ROS2 图像话题发布</p>
+                  <code>/camera/camera/color/image_raw</code>
+                </div>
               </div>
             </section>
 
             <aside class="detection-column">
               <section class="panel detection-panel">
-                <div class="panel-head"><span><i class="fa-solid fa-crosshairs"></i>识别结果</span></div>
+                <div class="panel-head"><span><i class="fa-solid fa-signal"></i>数据流状态</span></div>
                 <div class="detection-list">
-                  <div><span class="class-swatch blue"></span><strong>纸张</strong><span>92%</span></div>
-                  <div><span class="class-swatch green"></span><strong>瓶子</strong><span>88%</span></div>
-                  <div><span class="class-swatch yellow"></span><strong>USB</strong><span>81%</span></div>
+                  <div><span class="class-swatch gray"></span><strong>彩色图像</strong><span>无数据</span></div>
+                  <div><span class="class-swatch gray"></span><strong>深度图像</strong><span>无数据</span></div>
+                  <div><span class="class-swatch gray"></span><strong>识别目标</strong><span>0</span></div>
                 </div>
               </section>
               <section class="panel inference-panel">
@@ -268,8 +267,8 @@
                 <div class="inference-grid">
                   <div><span>模型</span><strong>YOLOv8-seg</strong></div>
                   <div><span>设备</span><strong>OpenVINO CPU</strong></div>
-                  <div><span>深度相机</span><strong>D435 在线</strong></div>
-                  <div><span>置信度阈值</span><strong>0.55</strong></div>
+                  <div><span>深度相机</span><strong class="offline-text">D435 无信号</strong></div>
+                  <div><span>推理状态</span><strong>等待图像</strong></div>
                 </div>
               </section>
             </aside>

@@ -40,10 +40,13 @@ const elements = {
 };
 
 const ctx = elements.canvas.getContext("2d");
+const mapImage = new Image();
+mapImage.src = "assets/images/custom-map.png";
 let toastTimer;
 let taskTimer;
 let cleanTimer;
 let canvasSize = { width: 0, height: 0, ratio: 1 };
+let mapBounds = { x: 32, y: 32, width: 1, height: 1 };
 
 function updateClock() {
   elements.time.textContent = new Date().toLocaleString("zh-CN", {
@@ -175,24 +178,21 @@ function resizeCanvas() {
   drawMap();
 }
 
-function drawRoundedRect(context, x, y, width, height, radius) {
-  const r = Math.min(radius, width / 2, height / 2);
-  context.beginPath();
-  context.roundRect(x, y, width, height, r);
-}
-
 function mapPoint(point) {
-  const padding = 32;
   return {
-    x: padding + point.x * (canvasSize.width - padding * 2),
-    y: padding + point.y * (canvasSize.height - padding * 2),
+    x: mapBounds.x + point.x * mapBounds.width,
+    y: mapBounds.y + point.y * mapBounds.height,
   };
 }
 
 function normalizedPoint(event) {
   const rect = elements.canvas.getBoundingClientRect();
-  const x = clamp((event.clientX - rect.left - 32) / Math.max(1, rect.width - 64), 0, 1);
-  const y = clamp((event.clientY - rect.top - 32) / Math.max(1, rect.height - 64), 0, 1);
+  const scaleX = canvasSize.width / rect.width;
+  const scaleY = canvasSize.height / rect.height;
+  const canvasX = (event.clientX - rect.left) * scaleX;
+  const canvasY = (event.clientY - rect.top) * scaleY;
+  const x = clamp((canvasX - mapBounds.x) / Math.max(1, mapBounds.width), 0, 1);
+  const y = clamp((canvasY - mapBounds.y) / Math.max(1, mapBounds.height), 0, 1);
   return { x, y };
 }
 
@@ -202,59 +202,35 @@ function drawFloorPlan() {
   ctx.fillStyle = "#151918";
   ctx.fillRect(0, 0, width, height);
 
-  const margin = 32;
-  const mapWidth = width - margin * 2;
-  const mapHeight = height - margin * 2;
+  const padding = 24;
+  const availableWidth = width - padding * 2;
+  const availableHeight = height - padding * 2;
+  const sourceWidth = mapImage.naturalWidth || 273;
+  const sourceHeight = mapImage.naturalHeight || 346;
+  const scale = Math.min(availableWidth / sourceWidth, availableHeight / sourceHeight);
+  const mapWidth = sourceWidth * scale;
+  const mapHeight = sourceHeight * scale;
+  mapBounds = {
+    x: (width - mapWidth) / 2,
+    y: (height - mapHeight) / 2,
+    width: mapWidth,
+    height: mapHeight,
+  };
+
   ctx.fillStyle = "#f9faf9";
-  ctx.fillRect(margin, margin, mapWidth, mapHeight);
-
-  ctx.strokeStyle = "#242a27";
-  ctx.lineWidth = 5;
-  ctx.strokeRect(margin, margin, mapWidth, mapHeight);
-
-  const walls = [
-    [0.31, 0, 0.31, 0.25],
-    [0.31, 0.41, 0.31, 0.64],
-    [0.31, 0.8, 0.31, 1],
-    [0.63, 0, 0.63, 0.22],
-    [0.63, 0.38, 0.63, 0.72],
-    [0.63, 0.86, 0.63, 1],
-    [0, 0.58, 0.2, 0.58],
-    [0.31, 0.58, 0.48, 0.58],
-    [0.63, 0.72, 1, 0.72],
-  ];
-
-  ctx.strokeStyle = "#323936";
-  ctx.lineWidth = 7;
-  ctx.lineCap = "square";
-  walls.forEach(([x1, y1, x2, y2]) => {
-    ctx.beginPath();
-    ctx.moveTo(margin + x1 * mapWidth, margin + y1 * mapHeight);
-    ctx.lineTo(margin + x2 * mapWidth, margin + y2 * mapHeight);
-    ctx.stroke();
-  });
-
-  ctx.strokeStyle = "rgba(31, 35, 40, 0.08)";
-  ctx.lineWidth = 1;
-  for (let x = margin; x <= width - margin; x += 28) {
-    ctx.beginPath();
-    ctx.moveTo(x, margin);
-    ctx.lineTo(x, height - margin);
-    ctx.stroke();
-  }
-  for (let y = margin; y <= height - margin; y += 28) {
-    ctx.beginPath();
-    ctx.moveTo(margin, y);
-    ctx.lineTo(width - margin, y);
-    ctx.stroke();
+  ctx.fillRect(mapBounds.x, mapBounds.y, mapBounds.width, mapBounds.height);
+  if (mapImage.complete && mapImage.naturalWidth) {
+    ctx.imageSmoothingEnabled = false;
+    ctx.drawImage(mapImage, mapBounds.x, mapBounds.y, mapBounds.width, mapBounds.height);
   }
 
-  ctx.fillStyle = "#1f2328";
-  ctx.font = "700 12px Microsoft YaHei";
-  ctx.fillText("办公区 A", margin + mapWidth * 0.09, margin + mapHeight * 0.13);
-  ctx.fillText("走廊", margin + mapWidth * 0.43, margin + mapHeight * 0.49);
-  ctx.fillText("办公区 B", margin + mapWidth * 0.72, margin + mapHeight * 0.13);
-  ctx.fillText("卸载区", margin + mapWidth * 0.78, margin + mapHeight * 0.84);
+  ctx.strokeStyle = "#4b524f";
+  ctx.lineWidth = 2;
+  ctx.strokeRect(mapBounds.x, mapBounds.y, mapBounds.width, mapBounds.height);
+
+  ctx.fillStyle = "rgba(246, 250, 248, 0.7)";
+  ctx.font = "11px Consolas, monospace";
+  ctx.fillText("custom.pgm · 0.03 m/px", 14, height - 12);
 }
 
 function drawRegion(region, color, fill, label) {
@@ -550,6 +526,7 @@ elements.canvas.addEventListener("pointerdown", onMapPointerDown);
 elements.canvas.addEventListener("pointermove", onMapPointerMove);
 elements.canvas.addEventListener("pointerup", onMapPointerUp);
 window.addEventListener("resize", resizeCanvas);
+mapImage.addEventListener("load", drawMap);
 
 addLog("系统", "机器人前端静态体验已启动");
 addLog("连接状态", "ROS2、D435、激光雷达与 STM32 使用模拟数据");
@@ -559,7 +536,3 @@ setInterval(updateClock, 1000);
 renderHome();
 renderLogs();
 updateTaskSummary();
-setInterval(() => {
-  const fps = 17.8 + Math.random() * 1.8;
-  document.querySelector("#monitor-fps").textContent = fps.toFixed(1);
-}, 1400);
