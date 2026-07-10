@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="垃圾拾取机器人原型验证阶段记录，展示早期整车结构、拾取演示和重构迭代过程。"
+    />
+    <title>原型验证阶段 | 刘佳鑫作品集</title>
+    <link rel="stylesheet" href="prototype.css?v=1" />
+  </head>
+  <body>
+    <a class="skip-link" href="#prototype-main">跳到主要内容</a>
+
+    <header class="prototype-header">
+      <a class="prototype-brand" href="index.html#top">
+        <span class="brand-block">LJX</span>
+        <span>
+          <strong>刘佳鑫</strong>
+          <small>机器人系统开发</small>
+        </span>
+      </a>
+      <nav aria-label="原型页面导航">
+        <a href="index.html#work">返回主项目</a>
+        <a class="header-demo-link" href="robot-demo.html?v=4">体验机器人前端</a>
+      </nav>
+    </header>
+
+    <main id="prototype-main">
+      <section class="prototype-hero">
+        <div class="hero-shade"></div>
+        <div class="hero-content">
+          <p class="eyebrow">PROTOTYPE VALIDATION / 01</p>
+          <h1>从第一台能工作的车，<br />走向完整机器人系统。</h1>
+          <p class="hero-lead">
+            在最终整机重构之前，这台原型车先验证移动底盘、机械臂、夹爪与垃圾桶能否形成最小拾取闭环。
+          </p>
+          <div class="hero-meta">
+            <div>
+              <span>阶段</span>
+              <strong>早期整机原型</strong>
+            </div>
+            <div>
+              <span>核心目标</span>
+              <strong>验证拾取闭环</strong>
+            </div>
+            <div>
+              <span>验证环境</span>
+              <strong>室内真实场地</strong>
+            </div>
+          </div>
+        </div>
+        <div class="hero-index">P01</div>
+      </section>
+
+      <section class="prototype-intro content-band">
+        <div class="section-number">01</div>
+        <div class="intro-title">
+          <p class="eyebrow dark">WHY PROTOTYPE</p>
+          <h2>先确认动作链路成立，<br />再投入完整系统重构。</h2>
+        </div>
+        <div class="intro-copy">
+          <p>
+            原型阶段不追求完整外观，而是尽快确认底盘、机械臂和夹爪能在同一平台上协同工作。
+            通过真实拾取测试，可以直接观察机械臂覆盖范围、车体稳定性、线路干涉和动作时序问题。
+          </p>
+          <p>
+            这些结果成为后续整机结构、布线方式、垃圾桶布局和控制流程重构的依据。
+          </p>
+        </div>
+      </section>
+
+      <section class="validation-section content-band">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow dark">MINIMUM LOOP</p>
+            <h2>原型验证链路</h2>
+          </div>
+          <p>用最小可运行系统逐段验证运动与操作能力。</p>
+        </div>
+
+        <div class="validation-grid">
+          <article>
+            <span>01</span>
+            <div class="validation-icon">M</div>
+            <h3>移动平台</h3>
+            <p>确认四轮底盘可以承载机械臂、控制板与垃圾桶完成室内移动。</p>
+          </article>
+          <article>
+            <span>02</span>
+            <div class="validation-icon">A</div>
+            <h3>机械臂覆盖</h3>
+            <p>验证机械臂安装位置、关节活动范围与地面目标之间的几何关系。</p>
+          </article>
+          <article>
+            <span>03</span>
+            <div class="validation-icon">G</div>
+            <h3>夹爪拾取</h3>
+            <p>测试夹爪接近、闭合、抬升和保持物体时的稳定性。</p>
+          </article>
+          <article>
+            <span>04</span>
+            <div class="validation-icon">L</div>
+            <h3>动作闭环</h3>
+            <p>将底盘接近、机械臂动作和垃圾回收串联为连续任务。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="prototype-video-section">
+        <div class="video-heading content-band">
+          <div>
+            <p class="eyebrow">LIVE TEST / 02:08</p>
+            <h2>原型拾取演示</h2>
+          </div>
+          <p>
+            视频记录早期原型在室内场地接近目标、执行机械臂动作并完成拾取验证的过程。
+          </p>
+        </div>
+        <div class="video-stage content-band">
+          <video
+            controls
+            preload="metadata"
+            playsinline
+            poster="assets/images/prototype-video-poster.webp"
+          >
+            <source src="assets/videos/prototype-pick.mp4" type="video/mp4" />
+            当前浏览器不支持视频播放。
+          </video>
+          <div class="video-caption">
+            <span>PROTOTYPE PICKING TEST</span>
+            <span>128 SEC · H.264</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="prototype-gallery content-band">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow dark">HARDWARE RECORD</p>
+            <h2>早期整车与结构细节</h2>
+          </div>
+          <p>原型保留了开放式结构，便于快速调整安装位置、线路和执行机构。</p>
+        </div>
+
+        <div class="gallery-layout">
+          <figure class="gallery-landscape">
+            <img
+              src="assets/images/prototype-car-overview.webp"
+              alt="垃圾拾取机器人原型验证阶段整车"
+              loading="lazy"
+            />
+            <figcaption>
+              <strong>整车原型</strong>
+              <span>机械臂、移动底盘、垃圾桶与升降机构首次完成整车集成</span>
+            </figcaption>
+          </figure>
+          <figure class="gallery-portrait">
+            <img
+              src="assets/images/prototype-car-detail.webp"
+              alt="垃圾拾取机器人原型底盘和机械臂结构细节"
+              loading="lazy"
+            />
+            <figcaption>
+              <strong>结构与布线</strong>
+              <span>开放式安装便于验证执行器、控制板和机械臂连接关系</span>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="iteration-section">
+        <div class="content-band">
+          <div class="section-heading light">
+            <div>
+              <p class="eyebrow">ITERATION</p>
+              <h2>原型验证之后，<br />进入系统级重构。</h2>
+            </div>
+            <p>
+              原型证明拾取动作可行，也暴露出结构集成、线路管理、传感器布局和任务协同方面的问题。
+            </p>
+          </div>
+
+          <div class="comparison">
+            <figure>
+              <img
+                src="assets/images/prototype-car-overview.webp"
+                alt="原型验证阶段垃圾拾取小车"
+                loading="lazy"
+              />
+              <figcaption>
+                <span>BEFORE</span>
+                <strong>快速验证原型</strong>
+                <p>开放结构、快速接线，以验证底盘和机械臂动作链路为主。</p>
+              </figcaption>
+            </figure>
+            <div class="comparison-arrow" aria-hidden="true">→</div>
+            <figure>
+              <img
+                src="assets/images/trash-robot-overview.webp"
+                alt="重构后的垃圾拾取机器人整机"
+                loading="lazy"
+              />
+              <figcaption>
+                <span>AFTER</span>
+                <strong>重构整机版本</strong>
+                <p>重新组织机械结构、感知系统、双桶分类和自动倾倒链路。</p>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="prototype-outcome content-band">
+        <div>
+          <p class="eyebrow dark">OUTCOME</p>
+          <h2>原型的价值，不只是证明“能动”。</h2>
+        </div>
+        <div class="outcome-list">
+          <div>
+            <span>01</span>
+            <p>确认移动底盘与机械臂可以组合成可运行的拾取平台。</p>
+          </div>
+          <div>
+            <span>02</span>
+            <p>提前发现机械臂覆盖、整车重心、线路干涉和动作时序问题。</p>
+          </div>
+          <div>
+            <span>03</span>
+            <p>为后续 ROS2 任务流程、视觉定位和整机结构重构提供实机基础。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="prototype-cta">
+        <div class="content-band">
+          <p class="eyebrow">NEXT STAGE</p>
+          <h2>继续查看重构后的完整机器人系统。</h2>
+          <div class="cta-links">
+            <a class="primary-cta" href="index.html#work">返回核心项目</a>
+            <a href="robot-demo.html?v=4">体验机器人前端</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>刘佳鑫 · 机器人系统开发作品集</span>
+      <a href="index.html#top">返回首页</a>
+    </footer>
+  </body>
+</html>
