@@ -6,11 +6,8 @@ const state = {
   mapMode: "goal",
   robot: { x: 0.2, y: 0.78 },
   goal: null,
-  dump: { x: 0.76, y: 0.25 },
-  regions: [
-    { id: 1, x: 0.17, y: 0.26, w: 0.28, h: 0.25 },
-    { id: 2, x: 0.57, y: 0.19, w: 0.24, h: 0.27 },
-  ],
+  dump: null,
+  regions: [],
   draftRegion: null,
   drawing: false,
   logs: [],
@@ -41,7 +38,7 @@ const elements = {
 
 const ctx = elements.canvas.getContext("2d");
 const mapImage = new Image();
-mapImage.src = "assets/images/custom-map.png?v=3";
+mapImage.src = "assets/images/custom-map.png?v=4";
 let toastTimer;
 let taskTimer;
 let cleanTimer;
@@ -265,15 +262,17 @@ function drawMap() {
     drawRegion(state.draftRegion, "#15945e", "rgba(34, 160, 107, 0.14)", "新区域");
   }
 
-  const dump = mapPoint(state.dump);
-  ctx.fillStyle = "rgba(47, 128, 237, 0.2)";
-  ctx.strokeStyle = "#2f80ed";
-  ctx.lineWidth = 2;
-  ctx.fillRect(dump.x - 34, dump.y - 26, 68, 52);
-  ctx.strokeRect(dump.x - 34, dump.y - 26, 68, 52);
-  ctx.fillStyle = "#1f63b5";
-  ctx.font = "700 10px Microsoft YaHei";
-  ctx.fillText("卸载区", dump.x - 18, dump.y + 4);
+  if (state.dump) {
+    const dump = mapPoint(state.dump);
+    ctx.fillStyle = "rgba(47, 128, 237, 0.2)";
+    ctx.strokeStyle = "#2f80ed";
+    ctx.lineWidth = 2;
+    ctx.fillRect(dump.x - 34, dump.y - 26, 68, 52);
+    ctx.strokeRect(dump.x - 34, dump.y - 26, 68, 52);
+    ctx.fillStyle = "#1f63b5";
+    ctx.font = "700 10px Microsoft YaHei";
+    ctx.fillText("卸载区", dump.x - 18, dump.y + 4);
+  }
 
   const robot = mapPoint(state.robot);
   if (state.goal) {
@@ -376,6 +375,10 @@ function executeMapTask() {
     return;
   }
 
+  if (!state.dump) {
+    showToast("请先在地图中设置卸载区");
+    return;
+  }
   animateRobotTo({ ...state.dump });
   addLog("卸载任务", "机器人前往已设置的垃圾卸载区");
 }
@@ -383,16 +386,13 @@ function executeMapTask() {
 function resetMap() {
   state.robot = { x: 0.2, y: 0.78 };
   state.goal = null;
-  state.dump = { x: 0.76, y: 0.25 };
-  state.regions = [
-    { id: 1, x: 0.17, y: 0.26, w: 0.28, h: 0.25 },
-    { id: 2, x: 0.57, y: 0.19, w: 0.24, h: 0.27 },
-  ];
+  state.dump = null;
+  state.regions = [];
   elements.navState.textContent = "导航就绪";
   elements.navState.className = "status-pill ok";
   updateTaskSummary();
   drawMap();
-  addLog("地图重置", "恢复默认机器人位置、清扫区域与卸载区");
+  addLog("地图重置", "清除导航目标、清扫区域与卸载区");
   showToast("演示地图已重置");
 }
 
@@ -530,7 +530,7 @@ mapImage.addEventListener("load", drawMap);
 
 addLog("系统", "机器人前端静态体验已启动");
 addLog("连接状态", "ROS2、D435、激光雷达与 STM32 使用模拟数据");
-addLog("地图加载", "办公区地图与默认清扫区域加载完成");
+addLog("地图加载", "项目 custom 地图加载完成，等待用户设置任务区域");
 updateClock();
 setInterval(updateClock, 1000);
 renderHome();
