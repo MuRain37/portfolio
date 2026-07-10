@@ -41,7 +41,7 @@ const elements = {
 
 const ctx = elements.canvas.getContext("2d");
 const mapImage = new Image();
-mapImage.src = "assets/images/custom-map.png";
+mapImage.src = "assets/images/custom-map.png?v=3";
 let toastTimer;
 let taskTimer;
 let cleanTimer;
