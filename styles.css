@@ -1406,11 +1406,39 @@ button {
   font-size: 11px;
 }
 
-.site-footer p:last-of-type {
+.footer-center {
+  display: flex;
+  align-items: center;
+  justify-self: center;
+  gap: 18px;
+}
+
+.footer-center p {
+  margin: 0;
   text-align: center;
 }
 
-.site-footer a {
+.footer-easter-egg {
+  width: auto;
+  height: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: rgba(255, 255, 255, 0.42);
+  border: 0;
+  transition: color 160ms ease;
+}
+
+.footer-easter-egg:hover {
+  color: var(--green);
+}
+
+.footer-easter-egg svg {
+  width: 13px;
+  height: 13px;
+}
+
+.site-footer > a {
   justify-self: end;
   display: grid;
   place-items: center;
@@ -2184,7 +2212,18 @@ button {
     padding: 25px 16px;
   }
 
-  .site-footer p:last-of-type {
+  .footer-center {
+    grid-row: 2;
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+
+  .footer-center p {
     display: none;
+  }
+
+  .site-footer > a {
+    grid-row: 1;
+    grid-column: 2;
   }
 }

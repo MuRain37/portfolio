@@ -134,11 +134,6 @@ a {
   border-color: var(--ink);
 }
 
-.header-demo-link {
-  background: var(--green);
-  border-color: var(--ink) !important;
-}
-
 .prototype-hero {
   position: relative;
   min-height: calc(100svh - var(--header-height));
@@ -571,6 +566,15 @@ footer {
 }
 
 footer a {
+  color: var(--green);
+}
+
+.prototype-easter-egg {
+  color: rgba(255, 255, 255, 0.5);
+  font-family: Consolas, monospace;
+}
+
+.prototype-easter-egg:hover {
   color: var(--green);
 }
 
