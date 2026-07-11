@@ -653,26 +653,27 @@ button {
 
 .project-demo-tabs {
   display: grid;
-  grid-template-columns: 1fr;
-  width: min(220px, 100%);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  width: min(560px, 100%);
   border: 1px solid rgba(255, 255, 255, 0.32);
 }
 
 .project-demo-tabs button {
   min-width: 0;
   min-height: 40px;
-  padding: 9px 16px;
+  padding: 9px 10px;
   border: 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.32);
+  border-right: 1px solid rgba(255, 255, 255, 0.32);
   color: rgba(255, 255, 255, 0.68);
   background: transparent;
   font-size: 12px;
-  text-align: left;
+  text-align: center;
+  white-space: nowrap;
   cursor: pointer;
 }
 
 .project-demo-tabs button:last-child {
-  border-bottom: 0;
+  border-right: 0;
 }
 
 .project-demo-tabs button.active {
@@ -2037,7 +2038,8 @@ button {
 
   .project-demo-tabs button {
     min-width: 0;
-    padding-inline: 14px;
+    padding-inline: 7px;
+    font-size: 11px;
   }
 
   .system-flow {
