@@ -267,6 +267,17 @@ button {
   padding: 8px 10px;
 }
 
+.featured-kicker {
+  width: max-content;
+  margin-bottom: 14px;
+  padding: 9px 12px;
+  color: var(--green);
+  background: var(--ink);
+  border: 1px solid var(--ink);
+  box-shadow: 5px 5px 0 var(--green);
+  font-size: 13px;
+}
+
 .role-pill {
   margin-right: 10px;
   padding: 5px 7px;
