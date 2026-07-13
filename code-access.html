@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="刘佳鑫核心机器人项目代码开放说明：Intel 杯比赛期间仓库保持私有，后续整理脱敏版开源。"
+    />
+    <meta name="theme-color" content="#111412" />
+    <title>代码开放说明 | 刘佳鑫作品集</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css?v=20260713-code-access" />
+    <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+    <script src="script.js?v=2" defer></script>
+  </head>
+  <body class="code-access-page">
+    <a class="skip-link" href="#main">跳至主要内容</a>
+
+    <header class="site-header">
+      <a class="brand" href="index.html#top" aria-label="返回作品集首页">
+        <span class="brand-mark">LJX</span>
+        <span>刘佳鑫</span>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <i data-lucide="menu"></i>
+        <span class="sr-only">打开导航</span>
+      </button>
+
+      <nav id="site-nav" class="site-nav" aria-label="主要导航">
+        <a href="index.html#work">项目</a>
+        <a href="index.html#capabilities">能力</a>
+        <a href="index.html#recognition">经历</a>
+        <a href="certificates.html">证书</a>
+        <a href="index.html#contact">联系</a>
+        <a class="nav-resume" href="index.html#work">
+          返回作品集
+          <i data-lucide="arrow-left"></i>
+        </a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="code-access-hero">
+        <div class="code-access-inner band">
+          <div>
+            <a class="certificate-back" href="index.html#work">
+              <i data-lucide="arrow-left"></i>
+              返回核心项目
+            </a>
+            <p class="eyebrow">Code Access / Intel Cup</p>
+            <h1>代码暂时保持私有。</h1>
+            <p class="code-access-lead">
+              当前项目仍处于 Intel 杯嵌入式 AI 专题邀请赛比赛期间。为保护竞赛材料、团队成果与后续答辩安全，
+              核心仓库在 2026 年 7 月 20 日之前保持私有状态。
+            </p>
+          </div>
+
+          <aside class="code-status-card" aria-label="代码开放状态">
+            <span>Repository Status</span>
+            <strong>Private</strong>
+            <small>Until 2026 / 07 / 20</small>
+          </aside>
+        </div>
+      </section>
+
+      <section class="code-access-content band">
+        <div class="code-access-grid">
+          <article>
+            <span>01</span>
+            <h2>为什么暂不公开</h2>
+            <p>
+              项目包含 ROS2 任务流程、嵌入式控制链路、导航与抓取调参、模型部署和整机联调细节。
+              比赛期间直接公开完整仓库，可能影响原创性确认、竞赛材料管理和后续评审安全。
+            </p>
+          </article>
+
+          <article>
+            <span>02</span>
+            <h2>后续开放计划</h2>
+            <p>
+              比赛阶段结束后，我会整理可公开版本，移除敏感配置、临时脚本、设备参数和未脱敏材料，
+              再逐步开放 README、系统结构、关键节点说明与可复现实验代码。
+            </p>
+          </article>
+
+          <article>
+            <span>03</span>
+            <h2>如何了解代码细节</h2>
+            <p>
+              如果需要评审、面试或合作沟通，我可以线下展示项目代码结构、核心模块实现、运行流程和调试记录。
+              也可以根据具体需求补充架构说明或模块级代码讲解。
+            </p>
+          </article>
+        </div>
+
+        <div class="code-access-actions">
+          <a class="button button-primary" href="mailto:1322279867@qq.com">
+            联系了解代码细节
+            <i data-lucide="mail"></i>
+          </a>
+          <a class="button button-outline-light" href="index.html#work">
+            返回项目展示
+            <i data-lucide="arrow-left"></i>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© <span id="year"></span> 刘佳鑫</p>
+      <div class="footer-center">
+        <p>Built for robotics, designed for clarity.</p>
+      </div>
+      <a href="#main" aria-label="返回顶部"><i data-lucide="arrow-up"></i></a>
+    </footer>
+  </body>
+</html>
