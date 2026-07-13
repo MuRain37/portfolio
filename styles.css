@@ -1812,6 +1812,17 @@ button {
   margin-top: 42px;
 }
 
+.code-access-actions .button-outline-light {
+  color: var(--ink);
+  background: transparent;
+  border-color: var(--ink);
+}
+
+.code-access-actions .button-outline-light:hover {
+  color: var(--green);
+  background: var(--ink);
+}
+
 .reveal {
   opacity: 0;
   transform: translateY(24px);
