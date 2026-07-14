@@ -15,7 +15,7 @@
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600;700;900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=20260713-code-access" />
+    <link rel="stylesheet" href="styles.css?v=20260714-aidolamp-project" />
     <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
     <script src="script.js?v=2" defer></script>
   </head>
@@ -429,13 +429,21 @@
             <span class="lead-badge">项目负责人</span>
             <h3>基于 OpenCV 与 FOC 的<br />激光打靶小车</h3>
             <p>
-              参与全国大学生电子设计竞赛 E 题，完成方框扫描、目标追踪、
-              激光自动瞄准与目标打击流程。
+              面向全国大学生电子设计竞赛 TI 杯 E 题，搭建基于树莓派、STM32/MSPM0G3507、
+              OpenCV 与 FOC 控制的视觉打靶小车。作为项目负责人，负责视觉识别、云台控制、
+              串口通信协议与打靶流程联调。
             </p>
+            <ul class="project-points">
+              <li>基于动态 ROI、透视变换与靶纸轮廓检测完成方框扫描、目标定位和激光瞄准。</li>
+              <li>结合卡尔曼滤波、线性运动预测、PID 调参和平滑控制，提升追踪稳定性。</li>
+              <li>构建多处理器串口通信协议，将视觉计算、底盘控制与云台控制解耦。</li>
+            </ul>
             <div class="tag-list">
               <span>OpenCV</span>
               <span>STM32</span>
+              <span>MSPM0</span>
               <span>FOC</span>
+              <span>PID</span>
               <span>视觉闭环</span>
             </div>
           </div>
@@ -512,32 +520,77 @@
             <span class="lead-badge">项目负责人</span>
             <h3>SoftBank NAO<br />人形机器人高尔夫</h3>
             <p>
-              基于 NAOqi、OpenCV 与 Python 多线程实现自主寻球和击球，
-              获湖南省程序设计大赛机器人高尔夫二等奖。
+              面向机器人高尔夫赛道，基于 NAOqi SDK、OpenCV 与 Python 多线程开发自主寻球、
+              对准和击球流程。作为项目负责人，负责视觉识别策略、运动决策和比赛现场联调。
             </p>
+            <ul class="project-points">
+              <li>使用 HSV 双段掩码、DoG 边缘增强、圆度过滤与霍夫变换，提高红球识别稳定性。</li>
+              <li>基于目标跟踪、单目/双目测距和视觉矫正闭环，完成球距估计与路径修正。</li>
+              <li>设计自主寻球、姿态调整与击球策略，获得湖南省机器人高尔夫赛道二等奖。</li>
+            </ul>
             <div class="tag-list">
-              <span>NAOqi</span>
+              <span>NAOqi SDK</span>
               <span>Python</span>
               <span>OpenCV</span>
+              <span>视觉测距</span>
               <span>多线程</span>
             </div>
           </div>
         </article>
 
-        <article class="compact-project reveal">
-          <div>
+        <article class="project-row aidolamp-project reveal">
+          <div class="row-copy">
             <p class="project-number">PROJECT 04</p>
             <span class="lead-badge">项目负责人</span>
             <h3>AIDoLamp 智能台灯</h3>
+            <p>
+              面向桌面陪伴式交互场景，搭建集视觉识别、手势交互与机械臂跟随于一体的智能台灯原型。
+              作为项目负责人，负责整体方案设计、视觉算法集成、控制逻辑设计与演示联调。
+            </p>
+            <ul class="project-points">
+              <li>基于 YOLOv8n 完成目标识别，结合 MediaPipe 实现手势触发与交互控制。</li>
+              <li>使用 OpenCV 处理摄像头画面，输出目标位置并驱动灯体机械臂完成跟随。</li>
+              <li>完成实物结构、感知链路和演示流程集成，形成可展示的桌面 AI 硬件原型。</li>
+            </ul>
+            <div class="tag-list">
+              <span>YOLOv8n</span>
+              <span>MediaPipe</span>
+              <span>OpenCV</span>
+              <span>机械臂追踪</span>
+              <span>多模态交互</span>
+            </div>
           </div>
-          <p>
-            基于 YOLOv8n 与 MediaPipe 的多模态交互和机械臂目标追踪系统。
-            项目图片与完整演示正在整理中。
-          </p>
-          <div class="tag-list">
-            <span>YOLOv8n</span>
-            <span>MediaPipe</span>
-            <span>机械臂追踪</span>
+
+          <div class="aidolamp-media">
+            <figure class="laser-hardware aidolamp-device">
+              <img
+                src="assets/images/aidolamp-device.webp?v=20260714b"
+                alt="AIDoLamp 智能台灯实物"
+                loading="lazy"
+              />
+              <figcaption>
+                <strong>智能台灯实物</strong>
+                <span>摄像头、灯体机械臂与桌面交互结构集成</span>
+              </figcaption>
+            </figure>
+
+            <div class="aidolamp-video">
+              <div class="video-frame">
+                <video
+                  controls
+                  preload="metadata"
+                  src="assets/videos/aidolamp-demo.mp4?v=20260714b"
+                  poster="assets/images/aidolamp-video-poster.webp?v=20260714b"
+                  aria-label="AIDoLamp 智能台灯演示视频"
+                >
+                  浏览器不支持视频播放。
+                </video>
+              </div>
+              <div class="aidolamp-video-caption">
+                <strong>交互演示</strong>
+                <span>展示台灯在手势触发、目标感知与机械臂跟随中的运行效果</span>
+              </div>
+            </div>
           </div>
         </article>
       </section>
