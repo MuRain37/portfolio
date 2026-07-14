@@ -731,10 +731,46 @@ button {
 }
 
 .responsibility {
-  padding: 30px;
+  position: relative;
+  padding: 34px;
   background: rgba(244, 242, 236, 0.94);
+  border: 2px solid var(--ink);
+  box-shadow: 10px 10px 0 var(--green);
+  overflow: hidden;
+}
+
+.responsibility::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 9px;
+  background: var(--green);
+}
+
+.role-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 22px;
+}
+
+.role-head .eyebrow {
+  margin: 0;
+}
+
+.role-head span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 12px;
   border: 1px solid var(--ink);
-  box-shadow: 9px 9px 0 rgba(25, 103, 255, 0.14);
+  background: var(--green);
+  color: var(--ink);
+  font-weight: 800;
+  font-size: 13px;
+  box-shadow: 4px 4px 0 var(--ink);
+  white-space: nowrap;
 }
 
 .project-story h3,
@@ -753,6 +789,20 @@ button {
   font-size: 17px;
 }
 
+.project-story .responsibility h3 {
+  max-width: 480px;
+  margin: 0;
+  font-size: clamp(28px, 3vw, 42px);
+  line-height: 1.16;
+}
+
+.project-story .responsibility .role-summary {
+  margin: 16px 0 26px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.9;
+}
+
 .check-list {
   margin: 0;
   padding: 0;
@@ -761,19 +811,24 @@ button {
 
 .check-list li {
   position: relative;
-  padding: 17px 0 17px 32px;
+  padding: 18px 0 18px 42px;
+  border-top: 1px solid var(--line);
+  font-weight: 600;
+}
+
+.check-list li:last-child {
   border-bottom: 1px solid var(--line);
 }
 
 .check-list li::before {
   content: "";
   position: absolute;
-  left: 0;
-  top: 26px;
-  width: 12px;
-  height: 6px;
-  border-left: 2px solid var(--blue);
-  border-bottom: 2px solid var(--blue);
+  left: 4px;
+  top: 23px;
+  width: 16px;
+  height: 8px;
+  border-left: 3px solid var(--blue);
+  border-bottom: 3px solid var(--blue);
   transform: rotate(-45deg);
 }
 
