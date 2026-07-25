@@ -1443,6 +1443,12 @@ button {
   color: var(--muted);
 }
 
+.timeline .timeline-subtitle {
+  margin-bottom: 8px;
+  color: var(--ink);
+  font-size: 15px;
+}
+
 .text-link {
   display: inline-flex;
   align-items: center;
