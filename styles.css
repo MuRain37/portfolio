@@ -725,6 +725,15 @@ button {
   padding: 110px 0;
 }
 
+.experience-story {
+  padding-top: 0;
+}
+
+/* 流程条带绿色错位阴影，紧随其后的资源区需要让出空间 */
+#work .project-resources {
+  padding-top: 110px;
+}
+
 .story-lead {
   padding-top: 28px;
   border-top: 8px solid var(--green);
@@ -885,6 +894,18 @@ button {
   object-fit: contain;
   background: var(--white);
 }
+
+.evidence-grid video {
+  display: block;
+  width: 100%;
+  height: 360px;
+  padding: 18px;
+  object-fit: contain;
+  background: var(--white);
+}
+
+/* 演示素材源分辨率仅 480px 宽，卡片尺寸即原生显示上限；
+   不要跨列放大，否则会明显发虚。 */
 
 .evidence-grid .evidence-large {
   grid-row: auto;
@@ -1997,7 +2018,8 @@ button {
     gap: 60px;
   }
 
-  .evidence-grid img {
+  .evidence-grid img,
+  .evidence-grid video {
     height: 300px;
   }
 
@@ -2313,8 +2335,10 @@ button {
   }
 
   .evidence-grid img,
+  .evidence-grid video,
   .evidence-grid .evidence-large img,
-  .evidence-grid .evidence-wide img {
+  .evidence-grid .evidence-wide img,
+  .evidence-grid .evidence-wide video {
     height: 300px;
     object-fit: contain;
   }

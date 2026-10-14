@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="刘佳鑫的机器人系统开发作品集，涵盖 ROS2、计算机视觉、嵌入式 AI、机械臂与移动机器人系统集成。"
+      content="刘佳鑫的机器人系统开发作品集，涵盖 ROS2、具身智能与模仿学习、遥操作与灵巧手、计算机视觉、嵌入式 AI 及整机系统集成。"
     />
     <meta name="theme-color" content="#f3f1eb" />
     <title>刘佳鑫 | 机器人系统开发作品集</title>
@@ -15,7 +15,7 @@
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600;700;900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=20260714-aidolamp-project" />
+    <link rel="stylesheet" href="styles.css?v=20261014-so101" />
     <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
     <script src="script.js?v=2" defer></script>
   </head>
@@ -35,11 +35,12 @@
 
       <nav id="site-nav" class="site-nav" aria-label="主要导航">
         <a href="#work">项目</a>
+        <a href="#experience">实习</a>
         <a href="#capabilities">能力</a>
-        <a href="#recognition">经历</a>
+        <a href="#recognition">荣誉</a>
         <a href="certificates.html">证书</a>
         <a href="#contact">联系</a>
-        <a class="nav-resume" href="assets/docs/Liu-Jiaxin-Resume.pdf?v=20260803" target="_blank">
+        <a class="nav-resume" href="assets/docs/Liu-Jiaxin-Resume.pdf?v=20261014" target="_blank">
           简历
           <i data-lucide="arrow-up-right"></i>
         </a>
@@ -57,8 +58,8 @@
               <span class="hero-title-line">走向完整闭环。</span>
             </h1>
             <p class="hero-lead">
-              我是刘佳鑫，人工智能专业本科生。专注移动机器人、计算机视觉与嵌入式控制，
-              具备从机械结构、感知算法到整机联调的完整项目经验。
+              我是刘佳鑫，人工智能专业本科生。专注机器人系统软件、具身智能与嵌入式控制，
+              具备从机械结构、感知算法、遥操作数据采集到整机联调的完整项目经验。
             </p>
             <div class="hero-actions">
               <a class="button button-primary" href="#work">
@@ -67,11 +68,11 @@
               </a>
               <a
                 class="button button-ghost"
-                href="https://gitee.com/murain37/ros2_robot"
+                href="https://github.com/MuRain37"
                 target="_blank"
                 rel="noreferrer"
               >
-                开源仓库
+                GitHub 开源
                 <i data-lucide="arrow-up-right"></i>
               </a>
             </div>
@@ -149,6 +150,197 @@
           <div class="section-index">02 / FEATURED WORK</div>
           <div>
             <p class="project-kicker featured-kicker">核心项目 / FEATURED PROJECT</p>
+            <span class="lead-badge">项目负责人</span>
+            <h2>ROS2 双臂<br />模仿学习与策略部署</h2>
+          </div>
+          <div class="project-meta">
+            <span>2026.08 - 2026.09</span>
+            <span>ROS2 Jazzy / MuJoCo</span>
+            <span>Apache-2.0 开源</span>
+          </div>
+        </div>
+
+        <div class="project-story band">
+          <article class="story-lead reveal">
+            <p class="eyebrow dark">Challenge</p>
+            <h3>让「遥操作采集到闭环推理」成为一条可复用的链路。</h3>
+            <p>
+              多数模仿学习项目止步于单次策略演示：换一种策略要复制一套 ROS 节点，换一台机械臂要重写一遍控制链路。
+              这个项目要解决的是复用问题——同一套运行时如何承载不同策略，不同机械臂如何共享同一条控制链路，
+              从而把「遥操作采集 → 数据集 → 训练 → 闭环推理」打通成可重复的流程。
+            </p>
+          </article>
+
+          <div class="responsibility reveal">
+            <p class="eyebrow dark">My Role</p>
+            <p class="role-subtitle">主要工作</p>
+            <ul class="check-list">
+              <li>搭建 SO101 与 UR5e 双臂 MuJoCo 仿真及主从遥操作链路</li>
+              <li>对 SO101 主臂做正运动学求解，将夹爪 TCP 位姿逐轴映射至 UR5e 基座坐标系，实现绝对位姿重定向与 IK 校验</li>
+              <li>设计统一策略运行时：按 checkpoint 配置自动识别 ACT / SmolVLA / Pi0，通过机器人适配器让不同机械臂共享同一控制链路</li>
+              <li>基于 MCAP 录制遥操作图像与关节状态并转换为 LeRobot 数据集</li>
+              <li>完成 ACT 与 SmolVLA 在方块分类、抽屉任务上的在线闭环推理</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="evidence-section band">
+          <div class="evidence-heading reveal">
+            <div>
+              <p class="eyebrow dark">Demonstrations</p>
+              <h3>从主从遥操作到策略闭环</h3>
+            </div>
+            <p>
+              以下片段均为项目实际运行录制：主从遥操作采集，以及 ACT 与 SmolVLA 两类策略在方块分类、
+              抽屉任务上的闭环推理表现。
+            </p>
+          </div>
+
+          <div class="evidence-grid">
+            <figure class="reveal">
+              <video
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                src="assets/videos/so101-teleoperation.mp4"
+                poster="assets/images/so101-teleoperation-poster.webp"
+                aria-label="SO101 主臂遥操作 UR5e 从臂演示"
+              ></video>
+              <figcaption>
+                <strong>主从遥操作</strong>
+                <span>对 SO101 主臂做正运动学求解，将夹爪 TCP 位姿映射至 UR5e 基座坐标系</span>
+              </figcaption>
+            </figure>
+            <figure class="reveal">
+              <video
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                src="assets/videos/so101-act-sorting.mp4"
+                poster="assets/images/so101-act-sorting-poster.webp"
+                aria-label="ACT 策略完成方块分类演示"
+              ></video>
+              <figcaption>
+                <strong>ACT · 方块分类</strong>
+                <span>ACT 策略在线闭环推理，自主完成方块分类</span>
+              </figcaption>
+            </figure>
+            <figure class="reveal">
+              <video
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                src="assets/videos/so101-act-drawer.mp4"
+                poster="assets/images/so101-act-drawer-poster.webp"
+                aria-label="ACT 策略完成抽屉操作演示"
+              ></video>
+              <figcaption>
+                <strong>ACT · 抽屉任务</strong>
+                <span>ACT 策略在线闭环推理，完成抽屉开合操作</span>
+              </figcaption>
+            </figure>
+            <figure class="reveal">
+              <video
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                src="assets/videos/so101-smolvla-sorting.mp4"
+                poster="assets/images/so101-smolvla-sorting-poster.webp"
+                aria-label="SmolVLA 策略完成方块分类演示"
+              ></video>
+              <figcaption>
+                <strong>SmolVLA · 方块分类</strong>
+                <span>换用 SmolVLA 策略，同一控制链路无需改动</span>
+              </figcaption>
+            </figure>
+            <figure class="reveal">
+              <video
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                src="assets/videos/so101-smolvla-drawer.mp4"
+                poster="assets/images/so101-smolvla-drawer-poster.webp"
+                aria-label="SmolVLA 策略完成抽屉操作演示"
+              ></video>
+              <figcaption>
+                <strong>SmolVLA · 抽屉任务</strong>
+                <span>VLA 策略在抽屉任务上的闭环推理表现</span>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <div class="system-flow band reveal" aria-label="模仿学习数据闭环">
+          <div class="flow-stage">
+            <span>01</span>
+            <i data-lucide="gamepad-2"></i>
+            <strong>遥操作采集</strong>
+            <small>SO101 主臂 / 主从映射</small>
+          </div>
+          <i class="flow-arrow" data-lucide="arrow-right"></i>
+          <div class="flow-stage">
+            <span>02</span>
+            <i data-lucide="database"></i>
+            <strong>数据集</strong>
+            <small>MCAP → LeRobot</small>
+          </div>
+          <i class="flow-arrow" data-lucide="arrow-right"></i>
+          <div class="flow-stage">
+            <span>03</span>
+            <i data-lucide="brain-circuit"></i>
+            <strong>策略训练</strong>
+            <small>ACT / SmolVLA / Pi0</small>
+          </div>
+          <i class="flow-arrow" data-lucide="arrow-right"></i>
+          <div class="flow-stage">
+            <span>04</span>
+            <i data-lucide="refresh-cw"></i>
+            <strong>闭环推理</strong>
+            <small>MuJoCo 双臂环境</small>
+          </div>
+        </div>
+
+        <div class="project-resources band reveal">
+          <div>
+            <p class="eyebrow dark">Project Resources</p>
+            <h3>继续了解项目</h3>
+            <p>
+              完整 ROS2 Jazzy 工作区、MuJoCo 双臂模型与统一策略运行时已开源，
+              仓库内含 ACT 与 SmolVLA 的推理演示与复现说明。
+            </p>
+          </div>
+          <div class="resource-links">
+            <a
+              href="https://github.com/MuRain37/so101-ros2-mujoco"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <i data-lucide="git-branch"></i>
+              <span>
+                <strong>开源仓库</strong>
+                <small>Apache-2.0 · ROS2 Jazzy / MuJoCo / LeRobot</small>
+              </span>
+              <i data-lucide="arrow-up-right"></i>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section id="work-robot" class="featured-project">
+        <div class="project-heading band">
+          <div class="section-index">03 / FEATURED WORK</div>
+          <div>
+            <p class="project-kicker featured-kicker">系统项目 / SYSTEMS PROJECT</p>
             <span class="lead-badge">项目负责人</span>
             <h2>办公区自主导航<br />垃圾分类拾取与倾倒系统</h2>
           </div>
@@ -395,14 +587,14 @@
               <i data-lucide="arrow-up-right"></i>
             </a>
             <a
-              href="https://gitee.com/murain37/ros2_robot"
+              href="https://github.com/MuRain37/ros2-trash-sorting-robot"
               target="_blank"
               rel="noreferrer"
             >
-              <i data-lucide="arrow-up-right"></i>
+              <i data-lucide="git-branch"></i>
               <span>
                 <strong>开源仓库</strong>
-                <small>Intel 杯项目已开源，可直接跳转查看</small>
+                <small>ROS2 整机系统源码，Apache-2.0 开源</small>
               </span>
               <i data-lucide="arrow-up-right"></i>
             </a>
@@ -421,8 +613,37 @@
         </div>
       </section>
 
+      <section id="experience" class="experience band">
+        <div class="section-index">04 / EXPERIENCE</div>
+        <div class="section-title reveal">
+          <h2>实习经历</h2>
+          <p>在具身智能公司参与遥操作系统与灵巧手软件栈开发，负责从硬件接入到数据交付的完整链路。</p>
+        </div>
+        <div class="project-story experience-story">
+          <article class="story-lead reveal">
+            <p class="eyebrow dark">2026.08 - 至今 · 实习</p>
+            <h3>深圳原动力智能<br />机器人软件工程师</h3>
+            <p>
+              参与具身智能数据采集链路建设：独立负责新版遥操作系统，并承担多款灵巧手的驱动开发与
+              运动重定向工作，产出的多模态示范数据直接支撑策略模型训练。
+            </p>
+          </article>
+          <div class="responsibility reveal">
+            <p class="eyebrow dark">What I Did</p>
+            <p class="role-subtitle">主要工作</p>
+            <ul class="check-list">
+              <li>独立搭建新版遥操作系统：以 Quest 3S 与 IO 数据手套为输入，遥操作 UR5/AR5 机械臂与 Wuji2 灵巧手，部署于 Jetson AGX Thor 边缘平台</li>
+              <li>设计硬件抽象层，支持 IO 外骨骼动捕服及多种机械臂、灵巧手型号的配置切换</li>
+              <li>负责 Sharpa、Wuji2 多款灵巧手的驱动开发与运动重定向（retargeting）</li>
+              <li>搭建遥操作仿真环境，基于 rosbag 录制多模态示范数据并交付训练组</li>
+              <li>维护旧版遥操作系统，完成 Docker 容器化部署、触觉反馈与灵巧手校准</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
       <section id="selected-work" class="secondary-work band">
-        <div class="section-index">03 / SELECTED WORK</div>
+        <div class="section-index">05 / SELECTED WORK</div>
         <div class="section-title reveal">
           <h2>更多项目</h2>
           <p>从视觉闭环到人形机器人，将算法落实到真实执行机构。</p>
@@ -602,21 +823,36 @@
 
       <section id="capabilities" class="capabilities">
         <div class="band">
-          <div class="section-index light">04 / CAPABILITIES</div>
+          <div class="section-index light">06 / CAPABILITIES</div>
           <div class="section-title light reveal">
             <h2>能力矩阵</h2>
-            <p>围绕移动操作机器人构建的软硬件能力组合。</p>
+            <p>围绕机器人系统软件、遥操作数据链路与具身智能构建的软硬件能力组合。</p>
           </div>
           <div class="capability-grid">
+            <article class="reveal">
+              <i data-lucide="network"></i>
+              <h3>ROS2 系统</h3>
+              <p>多节点架构、Launch、TF2、DDS/QoS、ros2_control、Action、硬件接口</p>
+            </article>
+            <article class="reveal">
+              <i data-lucide="gamepad-2"></i>
+              <h3>遥操作与数据采集</h3>
+              <p>Quest 3S、数据手套、外骨骼动捕、主从映射、rosbag / MCAP 多模态录制</p>
+            </article>
+            <article class="reveal">
+              <i data-lucide="hand"></i>
+              <h3>灵巧手与硬件适配</h3>
+              <p>Wuji2、Sharpa、驱动开发、运动重定向（retargeting）、UART / CAN、硬件抽象层</p>
+            </article>
+            <article class="reveal">
+              <i data-lucide="brain-circuit"></i>
+              <h3>策略部署与推理</h3>
+              <p>ACT、SmolVLA、LeRobot 数据集、策略运行时、ONNX、在线闭环推理</p>
+            </article>
             <article class="reveal">
               <i data-lucide="radar"></i>
               <h3>感知与视觉</h3>
               <p>OpenCV、YOLO、MediaPipe、PyTorch、RealSense、ONNX、OpenVINO</p>
-            </article>
-            <article class="reveal">
-              <i data-lucide="network"></i>
-              <h3>ROS2 系统</h3>
-              <p>多节点架构、Launch、TF2、ros2_control、Action、硬件接口</p>
             </article>
             <article class="reveal">
               <i data-lucide="map"></i>
@@ -631,19 +867,19 @@
             <article class="reveal">
               <i data-lucide="box"></i>
               <h3>机械与仿真</h3>
-              <p>SolidWorks、URDF、XACRO、Gazebo、机械结构设计与整机集成</p>
+              <p>SolidWorks、URDF、XACRO、Gazebo、MuJoCo、机械结构设计与整机集成</p>
             </article>
             <article class="reveal">
               <i data-lucide="code-2"></i>
               <h3>工程开发</h3>
-              <p>C/C++、Python、Git、Docker、模块化开发与系统调试</p>
+              <p>C/C++、Python、Linux、Git、Docker、模块化开发与系统调试</p>
             </article>
           </div>
         </div>
       </section>
 
       <section id="recognition" class="recognition band">
-        <div class="section-index">05 / RECOGNITION</div>
+        <div class="section-index">07 / RECOGNITION</div>
         <div class="section-title reveal">
           <h2>竞赛与经历</h2>
           <p>覆盖人工智能、机器人、嵌入式与程序设计，形成从省赛到国赛的持续竞赛成果。</p>
@@ -719,7 +955,10 @@
         <div class="contact-inner">
           <p class="eyebrow">Contact</p>
           <h2>持续构建真正可运行的<br />机器人系统。</h2>
-          <p>正在寻找机器人、ROS2、计算机视觉或嵌入式 AI 方向的实习与合作机会。</p>
+          <p>
+            2027 届本科应届生，求职方向为<strong>机器人软件与具身智能</strong>——ROS2 系统开发、
+            遥操作与数据链路、机器人软件工程。欢迎校招联系与技术交流。
+          </p>
           <div class="contact-actions">
             <a class="button button-primary" href="mailto:1322279867@qq.com">
               发送邮件
@@ -727,7 +966,7 @@
             </a>
             <a
               class="button button-outline-light"
-              href="assets/docs/Liu-Jiaxin-Resume.pdf?v=20260803"
+              href="assets/docs/Liu-Jiaxin-Resume.pdf?v=20261014"
               target="_blank"
             >
               下载简历
