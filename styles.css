@@ -904,8 +904,50 @@ button {
   background: var(--white);
 }
 
-/* 演示素材源分辨率仅 480px 宽，卡片尺寸即原生显示上限；
-   不要跨列放大，否则会明显发虚。 */
+/* 主从遥操作实拍是唯一的真实硬件片段，单独做成左图右文的特色块，
+   与下方 4 张仿真卡片分开铺满整行，避免挤进小格子里。
+   1440 视口下视频实显 554×312，对 480px 源仅放大 1.15 倍，接近原生不发虚。 */
+.evidence-grid .evidence-feature {
+  grid-column: 1 / 3;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.evidence-grid .evidence-feature video {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  padding: 18px;
+  object-fit: contain;
+  background: var(--white);
+}
+
+.evidence-grid .evidence-feature figcaption {
+  align-content: center;
+  gap: 8px;
+  padding: 26px 28px;
+  border-top: 0;
+  border-left: 1px solid var(--ink);
+}
+
+.evidence-grid .evidence-feature figcaption strong {
+  font-size: 18px;
+}
+
+/* 用直接子选择器，避免命中下面 tag-list 芯片里的 span */
+.evidence-grid .evidence-feature figcaption > span {
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.evidence-grid .evidence-feature .tag-list {
+  margin-top: 6px;
+}
+
+.evidence-grid .evidence-feature .tag-list span {
+  color: var(--ink);
+  font-size: 10px;
+}
 
 .evidence-grid .evidence-large {
   grid-row: auto;
@@ -2341,6 +2383,23 @@ button {
   .evidence-grid .evidence-wide video {
     height: 300px;
     object-fit: contain;
+  }
+
+  /* 特色块在窄屏收成上下结构：图在上、文字在下 */
+  .evidence-grid .evidence-feature {
+    grid-column: 1;
+    grid-template-columns: 1fr;
+  }
+
+  .evidence-grid .evidence-feature video {
+    height: 300px;
+    aspect-ratio: auto;
+  }
+
+  .evidence-grid .evidence-feature figcaption {
+    padding: 16px 18px 18px;
+    border-left: 0;
+    border-top: 1px solid var(--ink);
   }
 
   .project-demo-footer {
