@@ -729,6 +729,33 @@ button {
   padding-top: 0;
 }
 
+/* 左栏正文较短，下方会空出一大片；用与 hero 同源的行式表格补一组技术栈，
+   让两栏高度接近。行内改为左对齐 + 固定键宽，形成规整的键值对齐。 */
+.experience-stack-label {
+  margin: 38px 0 10px;
+}
+
+.experience-stack {
+  border-top: 1px solid rgba(21, 23, 22, 0.25);
+}
+
+.experience-stack li {
+  min-height: 50px;
+  padding: 0;
+}
+
+.experience-stack li:last-child {
+  border-bottom: 0;
+}
+
+.experience-stack div {
+  justify-content: flex-start;
+}
+
+.experience-stack strong {
+  min-width: 74px;
+}
+
 /* 流程条带绿色错位阴影，紧随其后的资源区需要让出空间 */
 #work .project-resources {
   padding-top: 110px;
