@@ -1,343 +1,490 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="刘佳鑫的竞赛证书与荣誉记录，涵盖机器人、人工智能、嵌入式开发与程序设计。"
-    />
-    <meta name="theme-color" content="#111412" />
-    <title>证书与荣誉 | 刘佳鑫</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600;700;900&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css" />
-    <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
-    <script src="script.js?v=2" defer></script>
-  </head>
-  <body class="certificate-page">
-    <a class="skip-link" href="#main">跳至主要内容</a>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>证书与荣誉 — 刘佳鑫</title>
+<meta name="description" content="刘佳鑫的 10 份获奖证书原件：全国大学生电子设计竞赛、中国大学生计算机设计大赛、蓝桥杯、湖南省机器人高尔夫与物联网竞赛。" />
+<meta name="theme-color" content="#fcfcfa" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="证书与荣誉 — 刘佳鑫" />
+<meta property="og:description" content="10 份获奖证书原件，按国家级与省级归档。" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
 
-    <header class="site-header">
-      <a class="brand" href="index.html#top" aria-label="返回作品集首页">
-        <span class="brand-mark">LJX</span>
-        <span>刘佳鑫</span>
+  :root {
+    --bg: #fcfcfa;
+    --ink: #16160f;
+    --body: #2c2c26;
+    --muted: #6d6d64;
+    --faint: #9b9b92;
+    --line: #e6e5df;
+    --rule: #d8d7cf;
+    --paper: #f3f2ec;
+    --link: #2a4fd0;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC",
+      "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+    --pad: 32px;
+  }
+
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 84px; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--body);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.78;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection { background: var(--ink); color: var(--bg); }
+  a { color: inherit; text-decoration: none; }
+  :focus-visible { outline: 2px solid var(--link); outline-offset: 3px; }
+  img { display: block; max-width: 100%; height: auto; }
+
+  .shell {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding-left: var(--pad);
+    padding-right: var(--pad);
+  }
+
+  /* ---------------- 顶栏 ---------------- */
+  .top {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(252, 252, 250, 0.9);
+    -webkit-backdrop-filter: saturate(180%) blur(10px);
+    backdrop-filter: saturate(180%) blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .top .shell {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    height: 60px;
+  }
+  .brand {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+  .brand span {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--faint);
+    letter-spacing: 0.1em;
+    margin-left: 10px;
+  }
+  .top .back {
+    margin-left: auto;
+    font-size: 13.5px;
+    color: var(--muted);
+  }
+  .top .back:hover { color: var(--ink); }
+  .cv {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.06em;
+    color: var(--body);
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    padding: 5px 12px;
+    transition: border-color 180ms ease, color 180ms ease;
+  }
+  .cv:hover { border-color: var(--ink); color: var(--ink); }
+
+  /* ---------------- 首屏 ---------------- */
+  .hero { padding-top: 76px; padding-bottom: 46px; }
+  .kicker {
+    margin: 0 0 26px;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+  .kicker .sep { padding: 0 10px; color: var(--rule); }
+  .hero h1 {
+    margin: 0 0 22px;
+    font-size: clamp(34px, 6vw, 64px);
+    line-height: 1.04;
+    letter-spacing: -0.035em;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .hero .lead {
+    margin: 0;
+    max-width: 40em;
+    font-size: 16.5px;
+    color: var(--body);
+  }
+  .stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    margin: 40px 0 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--line);
+  }
+  .stats li {
+    flex: 1 1 140px;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .stats b {
+    font-family: var(--mono);
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .stats span {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--faint);
+  }
+
+  /* ---------------- 分区 ---------------- */
+  .section { padding: 22px 0 40px; }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 22px;
+    padding-top: 34px;
+    border-top: 1px solid var(--rule);
+  }
+  .section-head .no {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.12em;
+    color: var(--faint);
+  }
+  .section-head h2 {
+    margin: 0;
+    font-size: 19px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  .section-head .n {
+    margin-left: auto;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--faint);
+  }
+
+  /* ---------------- 证书墙 ---------------- */
+  .wall {
+    column-count: 3;
+    column-gap: 22px;
+    margin: 26px 0 0;
+  }
+  .cert {
+    display: block;
+    break-inside: avoid;
+    page-break-inside: avoid;
+    margin: 0 0 26px;
+  }
+  .cert figure { margin: 0; }
+  .cert .frame {
+    padding: 10px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    transition: border-color 200ms ease, background 200ms ease;
+  }
+  .cert img {
+    width: 100%;
+    height: auto;
+    background: #fff;
+    transition: opacity 200ms ease;
+  }
+  .cert:hover .frame { border-color: var(--rule); background: #efeee7; }
+  .cert figcaption {
+    display: block;
+    margin-top: 11px;
+  }
+  .cert .meta {
+    display: block;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    color: var(--faint);
+    margin-bottom: 5px;
+  }
+  .cert strong {
+    display: block;
+    font-size: 14.5px;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+  .cert .note {
+    display: block;
+    margin-top: 3px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .cert .tag {
+    display: inline-block;
+    margin-top: 8px;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    color: var(--body);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: 1px 7px;
+  }
+  .cert .tag.nat { color: var(--ink); border-color: var(--rule); }
+
+  /* ---------------- 页脚 ---------------- */
+  .foot {
+    margin-top: 30px;
+    padding: 44px 0 72px;
+    border-top: 1px solid var(--rule);
+  }
+  .foot-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 14px 32px;
+  }
+  .foot a.mail {
+    font-size: clamp(18px, 2.4vw, 24px);
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 2px;
+  }
+  .foot a.mail:hover { border-color: var(--ink); }
+  .foot .back { font-size: 14px; color: var(--muted); }
+  .foot .back:hover { color: var(--ink); }
+  .colophon {
+    margin: 34px 0 0;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--faint);
+  }
+
+  /* ---------------- 响应式 ---------------- */
+  @media (max-width: 900px) {
+    .wall { column-count: 2; column-gap: 18px; }
+    .hero { padding-top: 56px; }
+  }
+  @media (max-width: 620px) {
+    :root { --pad: 20px; }
+    .top .shell { height: 56px; gap: 14px; }
+    .brand span { display: none; }
+    .wall { column-count: 1; }
+    .section-head { flex-wrap: wrap; gap: 6px 16px; }
+    .section-head .n { margin-left: 0; width: 100%; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition-duration: 0.01ms !important; }
+  }
+
+  @media print {
+    .top { position: static; }
+    .wall { column-count: 2; }
+    .cert { margin-bottom: 18pt; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="shell">
+    <a class="brand" href="index.html#top">刘佳鑫<span>CERTIFICATES / 2026</span></a>
+    <a class="back" href="index.html#awards">← 返回荣誉</a>
+    <a class="cv" href="assets/docs/Liu-Jiaxin-Resume.pdf?v=20261101" target="_blank" rel="noreferrer">简历 ↗</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero shell">
+    <p class="kicker">Recognition · Competition records<span class="sep">/</span>2024 – 2026</p>
+    <h1>证书与荣誉</h1>
+    <p class="lead">
+      10 份获奖证书原件，按国家级与省级归档。证书以项目负责人或个人参赛身份获得，
+      点击任意一张查看原图。
+    </p>
+    <ul class="stats">
+      <li><b>10</b><span>证书原件</span></li>
+      <li><b>04</b><span>国家级成果</span></li>
+      <li><b>06</b><span>省级成果</span></li>
+      <li><b>03</b><span>省级一等奖</span></li>
+    </ul>
+  </section>
+
+  <!-- ================= 01 国家级 ================= -->
+  <section class="section shell" aria-labelledby="nat">
+    <div class="section-head">
+      <span class="no">01 / NATIONAL</span>
+      <h2 id="nat">全国级成果</h2>
+      <span class="n">4 份</span>
+    </div>
+
+    <div class="wall">
+      <a class="cert" id="edc-2026" href="assets/certificates/intel-cup-national-third.jpg" target="_blank" rel="noreferrer" title="点击查看原图">
+        <figure>
+          <div class="frame"><img src="assets/certificates/intel-cup-national-third.jpg" alt="全国大学生电子设计竞赛 2026 年嵌入式 AI 专题邀请赛（Intel 杯）全国三等奖证书" loading="lazy" /></div>
+          <figcaption>
+            <span class="meta">2026 · 项目负责人</span>
+            <strong>全国大学生电子设计竞赛</strong>
+            <span class="note">2026 年嵌入式 AI 专题邀请赛（Intel 杯） · 全国三等奖</span>
+            <span class="tag nat">国家级</span>
+          </figcaption>
+        </figure>
       </a>
 
-      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
-        <i data-lucide="menu"></i>
-        <span class="sr-only">打开导航</span>
-      </button>
+      <a class="cert" id="ccai-2025-nat" href="assets/certificates/computer-ai-national-second.jpg" target="_blank" rel="noreferrer" title="点击查看原图">
+        <figure>
+          <div class="frame"><img src="assets/certificates/computer-ai-national-second.jpg" alt="中国大学生计算机设计大赛人工智能实践赛全国二等奖证书" loading="lazy" /></div>
+          <figcaption>
+            <span class="meta">2025 · 项目负责人</span>
+            <strong>中国大学生计算机设计大赛</strong>
+            <span class="note">人工智能实践赛 · 全国二等奖（垃圾分类抓取与倾倒系统）</span>
+            <span class="tag nat">国家级</span>
+          </figcaption>
+        </figure>
+      </a>
 
-      <nav id="site-nav" class="site-nav" aria-label="主要导航">
-        <a href="index.html#work">项目</a>
-        <a href="index.html#capabilities">能力</a>
-        <a href="index.html#recognition">经历</a>
-        <a href="certificates.html" aria-current="page">证书</a>
-        <a href="index.html#contact">联系</a>
-        <a class="nav-resume" href="index.html">
-          返回作品集
-          <i data-lucide="arrow-left"></i>
-        </a>
-      </nav>
-    </header>
+      <a class="cert" id="lanqiao-2025-nat" href="assets/certificates/lanqiao-embedded-national-third.jpg" target="_blank" rel="noreferrer" title="点击查看原图">
+        <figure>
+          <div class="frame"><img src="assets/certificates/lanqiao-embedded-national-third.jpg" alt="第十六届蓝桥杯全国软件和信息技术专业人才大赛嵌入式设计与开发全国三等奖证书" loading="lazy" /></div>
+          <figcaption>
+            <span class="meta">2025 · 个人参赛</span>
+            <strong>第十六届蓝桥杯</strong>
+            <span class="note">嵌入式设计与开发 · 全国三等奖</span>
+            <span class="tag nat">国家级</span>
+          </figcaption>
+        </figure>
+      </a>
 
-    <main id="main">
-      <section class="certificates-hero">
-        <div class="certificates-hero-inner band">
-          <div>
-            <a class="certificate-back" href="index.html#recognition">
-              <i data-lucide="arrow-left"></i>
-              返回竞赛与经历
-            </a>
-            <p class="eyebrow">Certificates / Recognition</p>
-            <h1>证书与荣誉</h1>
-            <p class="certificates-lead">
-              记录机器人、人工智能、嵌入式开发与程序设计方向的竞赛成果。
-              所有证书图片均保存在本站，可点击卡片查看高清原图。
-            </p>
-          </div>
+      <a class="cert" id="ccai-2024-nat" href="assets/certificates/computer-course-national-second.jpg" target="_blank" rel="noreferrer" title="点击查看原图">
+        <figure>
+          <div class="frame"><img src="assets/certificates/computer-course-national-second.jpg" alt="中国大学生计算机设计大赛微课与教学辅助赛全国二等奖证书" loading="lazy" /></div>
+          <figcaption>
+            <span class="meta">2024 · A* 算法项目</span>
+            <strong>中国大学生计算机设计大赛</strong>
+            <span class="note">微课与教学辅助赛道 · 全国二等奖</span>
+            <span class="tag nat">国家级</span>
+          </figcaption>
+        </figure>
+      </a>
+    </div>
+  </section>
 
-          <dl class="certificate-summary" aria-label="证书统计">
-            <div>
-              <dt>10</dt>
-              <dd>证书记录</dd>
-            </div>
-            <div>
-              <dt>04</dt>
-              <dd>全国级成果</dd>
-            </div>
-            <div>
-              <dt>06</dt>
-              <dd>省级成果</dd>
-            </div>
-          </dl>
-        </div>
-      </section>
+  <!-- ================= 02 省级 ================= -->
+  <section class="section shell" aria-labelledby="prov">
+    <div class="section-head">
+      <span class="no">02 / PROVINCIAL</span>
+      <h2 id="prov">省级成果</h2>
+      <span class="n">6 份</span>
+    </div>
 
-      <div class="certificates-content">
-        <section class="certificate-section band" aria-labelledby="national-title">
-          <div class="certificate-section-heading">
-            <div class="section-index">01 / NATIONAL</div>
-            <div>
-              <p class="eyebrow dark">National Awards</p>
-              <h2 id="national-title">全国级成果</h2>
-            </div>
-          </div>
+    <div class="wall">
+      <a class="cert" id="ccai-2025-prov" href="assets/certificates/computer-ai-provincial-first.jpg" target="_blank" rel="noreferrer" title="点击查看原图">
+        <figure>
+          <div class="frame"><img src="assets/certificates/computer-ai-provincial-first.jpg" alt="中国大学生计算机设计大赛人工智能实践赛省级一等奖证书" loading="lazy" /></div>
+          <figcaption>
+            <span class="meta">2025 · 项目负责人</span>
+            <strong>中国大学生计算机设计大赛</strong>
+            <span class="note">人工智能实践赛 · 省级一等奖</span>
+            <span class="tag">省级</span>
+          </figcaption>
+        </figure>
+      </a>
 
-          <div class="certificate-grid">
-            <a
-              class="certificate-card"
-              href="assets/certificates/intel-cup-national-third.jpg"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <figure>
-                <div class="certificate-image">
-                  <span class="certificate-badge">全国三等奖</span>
-                  <img
-                    src="assets/certificates/intel-cup-national-third.jpg"
-                    alt="大学生电子设计竞赛 2026 年嵌入式 AI 专题赛（英特尔杯）全国三等奖证书"
-                  />
-                </div>
-                <figcaption>
-                  <span>2026 / 项目负责人</span>
-                  <strong>大学生电子设计竞赛</strong>
-                  <small>2026 年嵌入式 AI 专题赛（英特尔杯） · 全国三等奖</small>
-                </figcaption>
-              </figure>
-            </a>
+      <a class="cert" id="lanqiao-2025-prov" href="assets/certificates/lanqiao-embedded-provincial-first.jpg" target="_blank" rel="noreferrer" title="点击查看原图">
+        <figure>
+          <div class="frame"><img src="assets/certificates/lanqiao-embedded-provincial-first.jpg" alt="第十六届蓝桥杯嵌入式设计与开发省级一等奖证书" loading="lazy" /></div>
+          <figcaption>
+            <span class="meta">2025 · 个人参赛</span>
+            <strong>第十六届蓝桥杯</strong>
+            <span class="note">嵌入式设计与开发 · 省级一等奖</span>
+            <span class="tag">省级</span>
+          </figcaption>
+        </figure>
+      </a>
 
-            <a
-              class="certificate-card"
-              href="assets/certificates/computer-ai-national-second.jpg"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <figure>
-                <div class="certificate-image">
-                  <span class="certificate-badge">全国二等奖</span>
-                  <img
-                    src="assets/certificates/computer-ai-national-second.jpg"
-                    alt="中国大学生计算机设计大赛人工智能实践赛全国二等奖证书"
-                  />
-                </div>
-                <figcaption>
-                  <span>2025 / 项目负责人</span>
-                  <strong>中国大学生计算机设计大赛</strong>
-                  <small>人工智能实践赛 · 全国二等奖</small>
-                </figcaption>
-              </figure>
-            </a>
+      <a class="cert" id="ccai-2024-prov" href="assets/certificates/computer-course-provincial-first.jpg" target="_blank" rel="noreferrer" title="点击查看原图">
+        <figure>
+          <div class="frame"><img src="assets/certificates/computer-course-provincial-first.jpg" alt="中国大学生计算机设计大赛微课与教学辅助赛省级一等奖证书" loading="lazy" /></div>
+          <figcaption>
+            <span class="meta">2024 · A* 算法项目</span>
+            <strong>中国大学生计算机设计大赛</strong>
+            <span class="note">微课与教学辅助赛道 · 省级一等奖</span>
+            <span class="tag">省级</span>
+          </figcaption>
+        </figure>
+      </a>
 
-            <a
-              class="certificate-card"
-              href="assets/certificates/computer-course-national-second.jpg"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <figure>
-                <div class="certificate-image">
-                  <span class="certificate-badge">全国二等奖</span>
-                  <img
-                    src="assets/certificates/computer-course-national-second.jpg"
-                    alt="中国大学生计算机设计大赛微课与教学辅助赛全国二等奖证书"
-                    loading="lazy"
-                  />
-                </div>
-                <figcaption>
-                  <span>2024 / A* 算法项目</span>
-                  <strong>中国大学生计算机设计大赛</strong>
-                  <small>微课与教学辅助赛 · 全国二等奖</small>
-                </figcaption>
-              </figure>
-            </a>
+      <a class="cert" id="nao-golf-2025" href="assets/certificates/nao-golf-provincial-second.jpg" target="_blank" rel="noreferrer" title="点击查看原图">
+        <figure>
+          <div class="frame"><img src="assets/certificates/nao-golf-provincial-second.jpg" alt="第 21 届湖南省大学生计算机程序设计竞赛机器人高尔夫赛道省级二等奖证书" loading="lazy" /></div>
+          <figcaption>
+            <span class="meta">2025 · 项目负责人</span>
+            <strong>第 21 届湖南省大学生计算机程序设计竞赛</strong>
+            <span class="note">机器人高尔夫赛道 · 省级二等奖（NAO 人形机器人）</span>
+            <span class="tag">省级</span>
+          </figcaption>
+        </figure>
+      </a>
 
-            <a
-              class="certificate-card"
-              href="assets/certificates/lanqiao-embedded-national-third.jpg"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <figure>
-                <div class="certificate-image">
-                  <span class="certificate-badge">全国三等奖</span>
-                  <img
-                    src="assets/certificates/lanqiao-embedded-national-third.jpg"
-                    alt="蓝桥杯全国软件和信息技术专业人才大赛嵌入式设计与开发全国三等奖证书"
-                    loading="lazy"
-                  />
-                </div>
-                <figcaption>
-                  <span>2025 / 个人参赛</span>
-                  <strong>蓝桥杯全国软件和信息技术专业人才大赛</strong>
-                  <small>嵌入式设计与开发 · 全国三等奖</small>
-                </figcaption>
-              </figure>
-            </a>
-          </div>
-        </section>
+      <a class="cert" id="iot-2025" href="assets/certificates/iot-provincial-second.jpg" target="_blank" rel="noreferrer" title="点击查看原图">
+        <figure>
+          <div class="frame"><img src="assets/certificates/iot-provincial-second.jpg" alt="第九届湖南省大学生物联网应用创新设计竞赛省级二等奖证书" loading="lazy" /></div>
+          <figcaption>
+            <span class="meta">2025 · 团队参赛</span>
+            <strong>第九届湖南省大学生物联网应用创新设计竞赛</strong>
+            <span class="note">技能赛 · 省级二等奖</span>
+            <span class="tag">省级</span>
+          </figcaption>
+        </figure>
+      </a>
 
-        <section class="certificate-section band" aria-labelledby="provincial-title">
-          <div class="certificate-section-heading">
-            <div class="section-index">02 / PROVINCIAL</div>
-            <div>
-              <p class="eyebrow dark">Provincial Awards</p>
-              <h2 id="provincial-title">省级成果</h2>
-            </div>
-          </div>
+      <a class="cert" id="lanqiao-2024-prov" href="assets/certificates/lanqiao-c-provincial-second.jpg" target="_blank" rel="noreferrer" title="点击查看原图">
+        <figure>
+          <div class="frame"><img src="assets/certificates/lanqiao-c-provincial-second.jpg" alt="第十五届蓝桥杯 C/C++ 程序设计省级二等奖证书" loading="lazy" /></div>
+          <figcaption>
+            <span class="meta">2024 · 个人参赛</span>
+            <strong>第十五届蓝桥杯</strong>
+            <span class="note">C/C++ 程序设计 · 省级二等奖</span>
+            <span class="tag">省级</span>
+          </figcaption>
+        </figure>
+      </a>
+    </div>
+  </section>
 
-          <div class="certificate-grid">
-            <a
-              class="certificate-card provincial"
-              href="assets/certificates/computer-ai-provincial-first.jpg"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <figure>
-                <div class="certificate-image">
-                  <span class="certificate-badge">省一等奖</span>
-                  <img
-                    src="assets/certificates/computer-ai-provincial-first.jpg"
-                    alt="中国大学生计算机设计大赛人工智能实践赛省一等奖证书"
-                    loading="lazy"
-                  />
-                </div>
-                <figcaption>
-                  <span>2025 / 项目负责人</span>
-                  <strong>中国大学生计算机设计大赛</strong>
-                  <small>人工智能实践赛 · 省一等奖</small>
-                </figcaption>
-              </figure>
-            </a>
+  <footer class="foot shell">
+    <div class="foot-row">
+      <a class="mail" href="mailto:1322279867@qq.com">1322279867@qq.com</a>
+      <a class="back" href="index.html">← 返回作品集</a>
+    </div>
+    <p class="colophon">刘佳鑫 · 2027 届 · 湖南城市学院 人工智能</p>
+  </footer>
+</main>
 
-            <a
-              class="certificate-card provincial"
-              href="assets/certificates/computer-course-provincial-first.jpg"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <figure>
-                <div class="certificate-image">
-                  <span class="certificate-badge">省一等奖</span>
-                  <img
-                    src="assets/certificates/computer-course-provincial-first.jpg"
-                    alt="中国大学生计算机设计大赛微课与教学辅助赛省一等奖证书"
-                    loading="lazy"
-                  />
-                </div>
-                <figcaption>
-                  <span>2024 / A* 算法项目</span>
-                  <strong>中国大学生计算机设计大赛</strong>
-                  <small>微课与教学辅助赛 · 省一等奖</small>
-                </figcaption>
-              </figure>
-            </a>
-
-            <a
-              class="certificate-card provincial"
-              href="assets/certificates/lanqiao-embedded-provincial-first.jpg"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <figure>
-                <div class="certificate-image">
-                  <span class="certificate-badge">省一等奖</span>
-                  <img
-                    src="assets/certificates/lanqiao-embedded-provincial-first.jpg"
-                    alt="蓝桥杯嵌入式设计与开发省一等奖证书"
-                    loading="lazy"
-                  />
-                </div>
-                <figcaption>
-                  <span>2025 / 个人参赛</span>
-                  <strong>蓝桥杯全国软件和信息技术专业人才大赛</strong>
-                  <small>嵌入式设计与开发 · 省一等奖</small>
-                </figcaption>
-              </figure>
-            </a>
-
-            <a
-              class="certificate-card provincial"
-              href="assets/certificates/lanqiao-c-provincial-second.jpg"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <figure>
-                <div class="certificate-image">
-                  <span class="certificate-badge">省二等奖</span>
-                  <img
-                    src="assets/certificates/lanqiao-c-provincial-second.jpg"
-                    alt="蓝桥杯 C/C++ 程序设计省二等奖证书"
-                    loading="lazy"
-                  />
-                </div>
-                <figcaption>
-                  <span>2024 / 个人参赛</span>
-                  <strong>蓝桥杯全国软件和信息技术专业人才大赛</strong>
-                  <small>C/C++ 程序设计 · 省二等奖</small>
-                </figcaption>
-              </figure>
-            </a>
-
-            <a
-              class="certificate-card provincial"
-              href="assets/certificates/nao-golf-provincial-second.jpg?v=20260711-rotate"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <figure>
-                <div class="certificate-image">
-                  <span class="certificate-badge">省二等奖</span>
-                  <img
-                    src="assets/certificates/nao-golf-provincial-second.jpg?v=20260711-rotate"
-                    alt="湖南省大学生程序设计大赛机器人高尔夫省二等奖证书"
-                    loading="lazy"
-                  />
-                </div>
-                <figcaption>
-                  <span>2025 / 项目负责人</span>
-                  <strong>第 21 届湖南省大学生计算机程序设计竞赛</strong>
-                  <small>机器人高尔夫赛道 · 省级二等奖</small>
-                </figcaption>
-              </figure>
-            </a>
-
-            <a
-              class="certificate-card provincial"
-              href="assets/certificates/iot-provincial-second.jpg"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <figure>
-                <div class="certificate-image">
-                  <span class="certificate-badge">省二等奖</span>
-                  <img
-                    src="assets/certificates/iot-provincial-second.jpg"
-                    alt="物联网应用创新设计竞赛省二等奖证书"
-                    loading="lazy"
-                  />
-                </div>
-                <figcaption>
-                  <span>2025 / 团队参赛</span>
-                  <strong>第九届湖南省大学生物联网应用创新设计竞赛</strong>
-                  <small>技能赛 · 省级二等奖</small>
-                </figcaption>
-              </figure>
-            </a>
-          </div>
-        </section>
-      </div>
-    </main>
-
-    <footer class="site-footer">
-      <p>© <span id="year"></span> 刘佳鑫</p>
-      <p>Certificates stored locally, presented for verification.</p>
-      <a href="#main" aria-label="返回页面顶部"><i data-lucide="arrow-up"></i></a>
-    </footer>
-  </body>
+</body>
 </html>

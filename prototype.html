@@ -1,252 +1,690 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="垃圾拾取机器人原型验证阶段记录，展示早期整车结构、拾取演示和重构迭代过程。"
-    />
-    <title>原型验证阶段 | 刘佳鑫作品集</title>
-    <link rel="stylesheet" href="prototype.css?v=1" />
-  </head>
-  <body>
-    <a class="skip-link" href="#prototype-main">跳到主要内容</a>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>原型验证记录 — 刘佳鑫</title>
+<meta name="description" content="垃圾拾取机器人原型验证阶段记录：早期整车结构、最小拾取闭环演示，以及进入系统级重构的判断依据。" />
+<meta name="theme-color" content="#fcfcfa" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
 
-    <header class="prototype-header">
-      <a class="prototype-brand" href="index.html#top">
-        <span class="brand-block">LJX</span>
-        <span>
-          <strong>刘佳鑫</strong>
-          <small>机器人系统开发</small>
-        </span>
-      </a>
-      <nav aria-label="原型页面导航">
-        <a href="index.html#work">返回主项目</a>
-      </nav>
-    </header>
+  :root {
+    --bg: #fcfcfa;
+    --ink: #16160f;
+    --body: #2c2c26;
+    --muted: #6d6d64;
+    --faint: #9b9b92;
+    --line: #e6e5df;
+    --rule: #d8d7cf;
+    --paper: #f3f2ec;
+    --link: #2a4fd0;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC",
+      "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+    --pad: 32px;
+  }
 
-    <main id="prototype-main">
-      <section class="prototype-hero">
-        <div class="hero-shade"></div>
-        <div class="hero-content">
-          <p class="eyebrow">PROTOTYPE VALIDATION / 01</p>
-          <h1>从第一台能工作的车，<br />走向完整机器人系统。</h1>
-          <p class="hero-lead">
-            在最终整机重构之前，这台原型车先验证移动底盘、机械臂、夹爪与垃圾桶能否形成最小拾取闭环。
-          </p>
-          <div class="hero-meta">
-            <div>
-              <span>阶段</span>
-              <strong>早期整机原型</strong>
-            </div>
-            <div>
-              <span>核心目标</span>
-              <strong>验证拾取闭环</strong>
-            </div>
-            <div>
-              <span>验证环境</span>
-              <strong>室内真实场地</strong>
-            </div>
-          </div>
-        </div>
-        <div class="hero-index">P01</div>
-      </section>
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 80px; }
 
-      <section class="prototype-intro content-band">
-        <div class="section-number">01</div>
-        <div class="intro-title">
-          <p class="eyebrow dark">WHY PROTOTYPE</p>
-          <h2>先确认动作链路成立，<br />再投入完整系统重构。</h2>
-        </div>
-        <div class="intro-copy">
-          <p>
-            原型阶段不追求完整外观，而是尽快确认底盘、机械臂和夹爪能在同一平台上协同工作。
-            通过真实拾取测试，可以直接观察机械臂覆盖范围、车体稳定性、线路干涉和动作时序问题。
-          </p>
-          <p>
-            这些结果成为后续整机结构、布线方式、垃圾桶布局和控制流程重构的依据。
-          </p>
-        </div>
-      </section>
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--body);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.78;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
 
-      <section class="validation-section content-band">
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow dark">MINIMUM LOOP</p>
-            <h2>原型验证链路</h2>
-          </div>
-          <p>用最小可运行系统逐段验证运动与操作能力。</p>
-        </div>
+  ::selection { background: var(--ink); color: var(--bg); }
+  a { color: inherit; text-decoration: none; }
+  :focus-visible { outline: 2px solid var(--link); outline-offset: 3px; }
+  img { display: block; max-width: 100%; height: auto; }
 
-        <div class="validation-grid">
-          <article>
-            <span>01</span>
-            <div class="validation-icon">M</div>
-            <h3>移动平台</h3>
-            <p>确认四轮底盘可以承载机械臂、控制板与垃圾桶完成室内移动。</p>
-          </article>
-          <article>
-            <span>02</span>
-            <div class="validation-icon">A</div>
-            <h3>机械臂覆盖</h3>
-            <p>验证机械臂安装位置、关节活动范围与地面目标之间的几何关系。</p>
-          </article>
-          <article>
-            <span>03</span>
-            <div class="validation-icon">G</div>
-            <h3>夹爪拾取</h3>
-            <p>测试夹爪接近、闭合、抬升和保持物体时的稳定性。</p>
-          </article>
-          <article>
-            <span>04</span>
-            <div class="validation-icon">L</div>
-            <h3>动作闭环</h3>
-            <p>将底盘接近、机械臂动作和垃圾回收串联为连续任务。</p>
-          </article>
-        </div>
-      </section>
+  .shell {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding-left: var(--pad);
+    padding-right: var(--pad);
+  }
 
-      <section class="prototype-video-section">
-        <div class="video-heading content-band">
-          <div>
-            <p class="eyebrow">LIVE TEST / 02:08</p>
-            <h2>原型拾取演示</h2>
-          </div>
-          <p>
-            视频记录早期原型在室内场地接近目标、执行机械臂动作并完成拾取验证的过程。
-          </p>
-        </div>
-        <div class="video-stage content-band">
-          <video
-            controls
-            preload="metadata"
-            playsinline
-            poster="assets/images/prototype-video-poster.webp"
-          >
-            <source src="assets/videos/prototype-pick.mp4" type="video/mp4" />
-            当前浏览器不支持视频播放。
-          </video>
-          <div class="video-caption">
-            <span>PROTOTYPE PICKING TEST</span>
-            <span>128 SEC · H.264</span>
-          </div>
-        </div>
-      </section>
+  /* ---------------- 顶栏 ---------------- */
+  .top {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(252, 252, 250, 0.9);
+    -webkit-backdrop-filter: saturate(180%) blur(10px);
+    backdrop-filter: saturate(180%) blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .top .shell {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    height: 60px;
+  }
+  .brand {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+  .brand span {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--faint);
+    letter-spacing: 0.1em;
+    margin-left: 10px;
+  }
+  .top .back {
+    margin-left: auto;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    padding: 5px 11px;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    transition: border-color 180ms ease, color 180ms ease, background 180ms ease;
+  }
+  .top .back:hover { border-color: var(--ink); color: var(--ink); background: #fff; }
 
-      <section class="prototype-gallery content-band">
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow dark">HARDWARE RECORD</p>
-            <h2>早期整车与结构细节</h2>
-          </div>
-          <p>原型保留了开放式结构，便于快速调整安装位置、线路和执行机构。</p>
-        </div>
+  /* ---------------- 按钮 ---------------- */
+  .btn,
+  .ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 9px 15px;
+    border-radius: 2px;
+    font-size: 13px;
+    letter-spacing: 0.01em;
+    transition: background 180ms ease, border-color 180ms ease, color 180ms ease,
+      transform 180ms cubic-bezier(0.2, 0.7, 0.3, 1);
+  }
+  .btn { background: var(--ink); color: var(--bg); }
+  .btn:hover { background: #000; color: #fff; transform: translateY(-1px); }
+  .ghost { border: 1px solid var(--rule); color: var(--muted); }
+  .ghost:hover { border-color: var(--ink); color: var(--ink); background: #fff; transform: translateY(-1px); }
+  .arw { font-family: var(--mono); font-size: 11px; line-height: 1; opacity: 0.62; }
+  .links { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 0; }
 
-        <div class="gallery-layout">
-          <figure class="gallery-landscape">
-            <img
-              src="assets/images/prototype-car-overview.webp"
-              alt="垃圾拾取机器人原型验证阶段整车"
-              loading="lazy"
-            />
-            <figcaption>
-              <strong>整车原型</strong>
-              <span>机械臂、移动底盘、垃圾桶与升降机构首次完成整车集成</span>
-            </figcaption>
-          </figure>
-          <figure class="gallery-portrait">
-            <img
-              src="assets/images/prototype-car-detail.webp"
-              alt="垃圾拾取机器人原型底盘和机械臂结构细节"
-              loading="lazy"
-            />
-            <figcaption>
-              <strong>结构与布线</strong>
-              <span>开放式安装便于验证执行器、控制板和机械臂连接关系</span>
-            </figcaption>
-          </figure>
-        </div>
-      </section>
+  /* ---------------- 首屏 ---------------- */
+  .hero { padding-top: 84px; padding-bottom: 56px; }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 232px;
+    gap: 64px;
+    align-items: end;
+  }
+  .kicker {
+    margin: 0 0 30px;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+  .hero h1 {
+    margin: 0 0 28px;
+    font-size: clamp(32px, 4.6vw, 52px);
+    line-height: 1.16;
+    letter-spacing: -0.04em;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .lede {
+    margin: 0;
+    max-width: 33em;
+    font-size: clamp(16.5px, 1.9vw, 19px);
+    line-height: 1.72;
+    color: var(--body);
+    text-wrap: pretty;
+  }
 
-      <section class="iteration-section">
-        <div class="content-band">
-          <div class="section-heading light">
-            <div>
-              <p class="eyebrow">ITERATION</p>
-              <h2>原型验证之后，<br />进入系统级重构。</h2>
-            </div>
-            <p>
-              原型证明拾取动作可行，也暴露出结构集成、线路管理、传感器布局和任务协同方面的问题。
-            </p>
-          </div>
+  /* 右侧事实表 */
+  .facts { border-top: 1px solid var(--rule); }
+  .facts div {
+    display: grid;
+    grid-template-columns: 62px minmax(0, 1fr);
+    gap: 12px;
+    padding: 9px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 13px;
+  }
+  .facts dt {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--faint);
+    padding-top: 2px;
+  }
+  .facts dd { margin: 0; color: var(--ink); }
 
-          <div class="comparison">
-            <figure>
-              <img
-                src="assets/images/prototype-car-overview.webp"
-                alt="原型验证阶段垃圾拾取小车"
-                loading="lazy"
-              />
-              <figcaption>
-                <span>BEFORE</span>
-                <strong>快速验证原型</strong>
-                <p>开放结构、快速接线，以验证底盘和机械臂动作链路为主。</p>
-              </figcaption>
-            </figure>
-            <div class="comparison-arrow" aria-hidden="true">→</div>
-            <figure>
-              <img
-                src="assets/images/trash-robot-overview.webp"
-                alt="重构后的垃圾拾取机器人整机"
-                loading="lazy"
-              />
-              <figcaption>
-                <span>AFTER</span>
-                <strong>重构整机版本</strong>
-                <p>重新组织机械结构、感知系统、双桶分类和自动倾倒链路。</p>
-              </figcaption>
-            </figure>
-          </div>
-        </div>
-      </section>
+  /* ---------------- 章节骨架 ---------------- */
+  .row {
+    display: grid;
+    grid-template-columns: 148px minmax(0, 1fr);
+    gap: 48px;
+    padding-top: 40px;
+    padding-bottom: 84px;
+    border-top: 1px solid var(--rule);
+  }
+  .rail .num {
+    display: block;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--faint);
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+  .rail h2 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    color: var(--ink);
+  }
+  .rail p {
+    margin: 10px 0 0;
+    font-size: 12.5px;
+    line-height: 1.6;
+    color: var(--faint);
+  }
 
-      <section class="prototype-outcome content-band">
+  h3.lead {
+    margin: 0 0 18px;
+    font-size: clamp(19px, 2.2vw, 22px);
+    line-height: 1.45;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  p.copy {
+    margin: 0 0 16px;
+    font-size: 15.5px;
+    color: var(--body);
+    text-wrap: pretty;
+  }
+  p.copy:last-child { margin-bottom: 0; }
+
+  /* ---------------- 验证链路 ---------------- */
+  .chain {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1px;
+    margin: 0;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  .chain div {
+    background: var(--bg);
+    padding: 22px 22px 24px;
+  }
+  .chain .k {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--faint);
+  }
+  .chain h4 {
+    margin: 10px 0 8px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .chain p { margin: 0; font-size: 13.5px; line-height: 1.7; color: var(--muted); }
+
+  /* ---------------- 图 / 视频 ---------------- */
+  figure { margin: 0; }
+  figure .ph {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: var(--paper);
+  }
+  figure img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .shots { display: grid; gap: 14px; }
+  .shots.two { grid-template-columns: 1fr 1fr; }
+  .shots.equal figure .ph { aspect-ratio: 4 / 3; }
+  .shots.equal figure.fit img { object-fit: contain; padding: 8px; background: #fbfbf9; }
+  figure figcaption {
+    margin-top: 9px;
+    font-family: var(--mono);
+    font-size: 11px;
+    line-height: 1.6;
+    letter-spacing: 0.02em;
+    color: var(--faint);
+  }
+  figure figcaption .k { display: inline-block; margin-right: 9px; font-size: 10.5px; letter-spacing: 0.1em; }
+  figure figcaption .t {
+    font-family: var(--sans);
+    font-size: 12.5px;
+    color: var(--muted);
+  }
+
+  .clip { position: relative; }
+  .clip .ph { background: #0b0d0c; }
+  .clip:hover .ph { border-color: var(--rule); }
+  .clip video {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    background: #0b0d0c;
+    cursor: pointer;
+  }
+  .clip .tri {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 46px; height: 46px;
+    display: grid;
+    place-items: center;
+    padding: 0; margin: 0;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(252, 252, 250, 0.94);
+    box-shadow: 0 2px 18px rgba(0, 0, 0, 0.26);
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+    transition: opacity 200ms ease, transform 200ms ease, background 160ms ease;
+  }
+  .clip .tri::before {
+    content: "";
+    width: 0; height: 0;
+    border-left: 11px solid var(--ink);
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    margin-left: 3px;
+  }
+  .clip.is-playing .tri::before {
+    width: 10px; height: 12px;
+    margin-left: 0;
+    border: 0;
+    border-left: 3px solid var(--ink);
+    border-right: 3px solid var(--ink);
+  }
+  .clip .tri:hover { background: #fff; }
+  .clip.is-playing .tri { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+  .clip.is-playing:hover .tri { opacity: 0.94; transform: translate(-50%, -50%) scale(1); }
+  .clip .prog {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.2);
+    pointer-events: none;
+  }
+  .clip .prog i { display: block; height: 100%; width: 0; background: rgba(252, 252, 250, 0.92); }
+  .clip.is-playing .prog i { transition: width 140ms linear; }
+
+  /* ---------------- 前后对比 ---------------- */
+  .compare {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 40px minmax(0, 1fr);
+    align-items: center;
+    gap: 16px;
+  }
+  .compare .arw {
+    font-family: var(--mono);
+    font-size: 16px;
+    color: var(--muted);
+    text-align: center;
+    opacity: 1;
+  }
+  .compare figure .ph { aspect-ratio: 4 / 3; }
+  .compare .tag {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+    color: var(--faint);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: 1px 7px;
+    margin-bottom: 8px;
+  }
+  .compare h4 { margin: 0 0 6px; font-size: 14.5px; font-weight: 600; color: var(--ink); }
+  .compare p { margin: 0; font-size: 13px; line-height: 1.7; color: var(--muted); }
+
+  /* ---------------- 结论 ---------------- */
+  .takes { border-top: 1px solid var(--line); }
+  .takes div {
+    display: grid;
+    grid-template-columns: 40px minmax(0, 1fr);
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 15px;
+    color: var(--body);
+  }
+  .takes span {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--faint);
+    padding-top: 5px;
+  }
+
+  /* ---------------- 页脚 ---------------- */
+  .foot {
+    border-top: 1px solid var(--rule);
+    padding: 30px 0 60px;
+  }
+  .foot .shell {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 24px;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.04em;
+    color: var(--faint);
+  }
+  .foot a:hover { color: var(--ink); }
+  .foot .egg { margin-left: auto; }
+
+  /* ---------------- 响应式 ---------------- */
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: minmax(0, 1fr); gap: 40px; align-items: start; }
+    .hero { padding-top: 56px; padding-bottom: 40px; }
+  }
+  @media (max-width: 720px) {
+    :root { --pad: 20px; }
+    .top .back { font-size: 11px; }
+    .row { grid-template-columns: 1fr; gap: 22px; padding-top: 32px; padding-bottom: 56px; }
+    .rail .num { display: inline; margin-right: 10px; }
+    .rail h2 { display: inline; }
+    .rail p { display: block; margin-top: 6px; }
+    .chain { grid-template-columns: 1fr; }
+    .shots.two { grid-template-columns: 1fr; }
+    .compare { grid-template-columns: 1fr; gap: 12px; }
+    .compare .arw { transform: rotate(90deg); }
+    .clip .tri { width: 40px; height: 40px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="shell">
+    <a class="brand" href="index.html">刘佳鑫<span>PROTOTYPE / 01</span></a>
+    <a class="back" href="index.html#work">← 返回作品集</a>
+  </div>
+</header>
+
+<main>
+
+  <!-- 首屏 -->
+  <section class="hero shell">
+    <div class="hero-grid">
+      <div>
+        <p class="kicker">Prototype Validation · 早期整机原型</p>
+        <h1>从第一台能工作的车，<br />走向完整机器人系统。</h1>
+        <p class="lede">
+          在最终整机重构之前，这台原型车先验证移动底盘、机械臂、夹爪与垃圾桶能否形成最小拾取闭环。
+        </p>
+      </div>
+      <dl class="facts">
+        <div><dt>阶段</dt><dd>早期整机原型</dd></div>
+        <div><dt>核心目标</dt><dd>验证拾取闭环</dd></div>
+        <div><dt>验证环境</dt><dd>室内真实场地</dd></div>
+        <div><dt>后续</dt><dd>系统级重构</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- 01 为什么 -->
+  <section class="row shell">
+    <div class="rail">
+      <span class="num">01</span>
+      <h2>为什么先做原型</h2>
+      <p>先确认动作链路成立，<br />再投入完整系统重构。</p>
+    </div>
+    <div>
+      <h3 class="lead">不追求外观，先确认底盘、机械臂和夹爪能在同一平台上协同工作。</h3>
+      <p class="copy">
+        通过真实拾取测试，可以直接观察机械臂覆盖范围、车体稳定性、线路干涉和动作时序问题。
+        这些问题在纸面设计与仿真里都不容易暴露，只有跑起来才会显形。
+      </p>
+      <p class="copy">
+        这些结果成为后续整机结构、布线方式、垃圾桶布局和控制流程重构的依据。
+      </p>
+    </div>
+  </section>
+
+  <!-- 02 最小链路 -->
+  <section class="row shell">
+    <div class="rail">
+      <span class="num">02</span>
+      <h2>最小验证链路</h2>
+      <p>用最小可运行系统<br />逐段验证运动与操作能力。</p>
+    </div>
+    <div>
+      <div class="chain">
         <div>
-          <p class="eyebrow dark">OUTCOME</p>
-          <h2>原型的价值，不只是证明“能动”。</h2>
+          <span class="k">01 / M</span>
+          <h4>移动平台</h4>
+          <p>确认四轮底盘可以承载机械臂、控制板与垃圾桶完成室内移动。</p>
         </div>
-        <div class="outcome-list">
-          <div>
-            <span>01</span>
-            <p>确认移动底盘与机械臂可以组合成可运行的拾取平台。</p>
-          </div>
-          <div>
-            <span>02</span>
-            <p>提前发现机械臂覆盖、整车重心、线路干涉和动作时序问题。</p>
-          </div>
-          <div>
-            <span>03</span>
-            <p>为后续 ROS2 任务流程、视觉定位和整机结构重构提供实机基础。</p>
-          </div>
+        <div>
+          <span class="k">02 / A</span>
+          <h4>机械臂覆盖</h4>
+          <p>验证机械臂安装位置、关节活动范围与地面目标之间的几何关系。</p>
         </div>
-      </section>
+        <div>
+          <span class="k">03 / G</span>
+          <h4>夹爪拾取</h4>
+          <p>测试夹爪接近、闭合、抬升和保持物体时的稳定性。</p>
+        </div>
+        <div>
+          <span class="k">04 / L</span>
+          <h4>动作闭环</h4>
+          <p>将底盘接近、机械臂动作和垃圾回收串联为连续任务。</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-      <section class="prototype-cta">
-        <div class="content-band">
-          <p class="eyebrow">NEXT STAGE</p>
-          <h2>继续查看重构后的完整机器人系统。</h2>
-          <div class="cta-links">
-            <a class="primary-cta" href="index.html#work">返回核心项目</a>
-          </div>
+  <!-- 03 演示 -->
+  <section class="row shell">
+    <div class="rail">
+      <span class="num">03</span>
+      <h2>拾取演示</h2>
+      <p>室内真实场地<br />02:08 · H.264</p>
+    </div>
+    <div>
+      <figure class="clip" data-auto="2">
+        <div class="ph">
+          <video muted loop playsinline preload="none" poster="assets/images/prototype-video-poster.webp" aria-label="原型阶段拾取演示">
+            <source src="assets/videos/prototype-pick.mp4" type="video/mp4" />
+          </video>
+          <button class="tri" type="button" aria-label="播放"></button>
+          <span class="prog" aria-hidden="true"><i></i></span>
         </div>
-      </section>
-    </main>
+        <figcaption><span class="k">CLIP 01</span><span class="t">接近目标 · 机械臂动作 · 完成拾取</span></figcaption>
+      </figure>
+    </div>
+  </section>
 
-    <footer>
-      <span>刘佳鑫 · 机器人系统开发作品集</span>
-      <a class="prototype-easter-egg" href="robot-demo.html?v=4">彩蛋：体验机器人前端</a>
-      <a href="index.html#top">返回首页</a>
-    </footer>
-  </body>
+  <!-- 04 硬件记录 -->
+  <section class="row shell">
+    <div class="rail">
+      <span class="num">04</span>
+      <h2>早期整车与结构</h2>
+      <p>开放式结构，<br />便于快速调整。</p>
+    </div>
+    <div>
+      <div class="shots two equal">
+        <figure>
+          <div class="ph"><img src="assets/images/prototype-car-overview.webp" alt="垃圾拾取机器人原型验证阶段整车" loading="lazy" /></div>
+          <figcaption><span class="k">FIG 1</span><span class="t">整车原型：机械臂、底盘、垃圾桶与升降机构首次集成</span></figcaption>
+        </figure>
+        <figure>
+          <div class="ph"><img src="assets/images/prototype-car-detail.webp" alt="原型底盘与机械臂结构细节" loading="lazy" /></div>
+          <figcaption><span class="k">FIG 2</span><span class="t">结构与布线：执行器、控制板与机械臂的连接关系</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 迭代 -->
+  <section class="row shell">
+    <div class="rail">
+      <span class="num">05</span>
+      <h2>重构前后</h2>
+      <p>原型证明动作可行，<br />也暴露了集成问题。</p>
+    </div>
+    <div>
+      <div class="compare">
+        <figure>
+          <div class="ph"><img src="assets/images/prototype-car-overview.webp" alt="原型验证阶段的垃圾拾取小车" loading="lazy" /></div>
+          <figcaption>
+            <span class="tag">BEFORE</span>
+            <h4>快速验证原型</h4>
+            <p>开放结构、快速接线，以验证底盘和机械臂动作链路为主。</p>
+          </figcaption>
+        </figure>
+        <span class="arw" aria-hidden="true">→</span>
+        <figure>
+          <div class="ph"><img src="assets/images/trash-robot-overview.webp" alt="重构后的垃圾拾取机器人整机" loading="lazy" /></div>
+          <figcaption>
+            <span class="tag">AFTER</span>
+            <h4>重构整机版本</h4>
+            <p>重新组织机械结构、感知系统、双桶分类和自动倾倒链路。</p>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 结论 -->
+  <section class="row shell">
+    <div class="rail">
+      <span class="num">06</span>
+      <h2>结论</h2>
+      <p>原型的价值，<br />不只是证明"能动"。</p>
+    </div>
+    <div>
+      <div class="takes">
+        <div><span>01</span><span>确认移动底盘与机械臂可以组合成可运行的拾取平台。</span></div>
+        <div><span>02</span><span>提前发现机械臂覆盖、整车重心、线路干涉和动作时序问题。</span></div>
+        <div><span>03</span><span>为后续 ROS2 任务流程、视觉定位和整机结构重构提供实机基础。</span></div>
+      </div>
+      <p class="links" style="margin-top: 26px">
+        <a class="btn" href="index.html#work">返回核心项目<span class="arw">↗</span></a>
+        <a class="ghost" href="assets/docs/ROS2-Trash-Robot-Technical-Report.pdf" target="_blank" rel="noreferrer">技术报告 PDF · 31 页<span class="arw">↗</span></a>
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="shell">
+    <span>刘佳鑫 · 2027 届 · 湖南城市学院 人工智能</span>
+    <a class="egg" href="robot-demo.html?v=4">彩蛋：体验机器人前端 ↗</a>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var figs = document.querySelectorAll('.clip');
+    if (!figs.length) return;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var saveData = !!(navigator.connection && navigator.connection.saveData);
+
+    Array.prototype.forEach.call(figs, function (fig) {
+      var v = fig.querySelector('video');
+      var btn = fig.querySelector('.tri');
+      var bar = fig.querySelector('.prog i');
+      if (!v) return;
+      v.muted = true;
+      v.removeAttribute('controls');
+
+      function sync() {
+        var playing = !v.paused && !v.ended;
+        fig.classList.toggle('is-playing', playing);
+        if (btn) btn.setAttribute('aria-label', playing ? '暂停' : '播放');
+      }
+      function toggle() {
+        if (v.paused || v.ended) {
+          var p = v.play();
+          if (p && p.catch) p.catch(function () {});
+          fig.dataset.locked = '1';
+        } else {
+          v.pause();
+          fig.dataset.locked = 'paused';
+        }
+      }
+      ['play', 'pause', 'ended'].forEach(function (ev) { v.addEventListener(ev, sync); });
+      v.addEventListener('timeupdate', function () {
+        if (bar && v.duration) bar.style.width = ((v.currentTime / v.duration) * 100).toFixed(1) + '%';
+      });
+      fig.querySelector('.ph').addEventListener('click', function (e) {
+        e.preventDefault();
+        toggle();
+      });
+      sync();
+    });
+
+    if (reduce || saveData) return;
+
+    var autos = [].filter.call(figs, function (f) { return f.dataset.auto; });
+
+    function inView(el) {
+      var r = el.getBoundingClientRect();
+      var h = window.innerHeight || document.documentElement.clientHeight;
+      var visible = Math.min(r.bottom, h) - Math.max(r.top, 0);
+      return visible > Math.min(r.height, h) * 0.55;
+    }
+
+    function scan() {
+      autos.forEach(function (fig) {
+        var v = fig.querySelector('video');
+        if (!v) return;
+        var dwell = fig.dataset.auto === '2';
+        if (inView(fig)) {
+          if (v.paused && !document.hidden && fig.dataset.locked !== 'paused') {
+            if (dwell) {
+              if (!fig._timer) {
+                fig._timer = window.setTimeout(function () {
+                  fig._timer = null;
+                  if (inView(fig) && v.paused && fig.dataset.locked !== 'paused') {
+                    var p = v.play();
+                    if (p && p.catch) p.catch(function () {});
+                  }
+                }, 1100);
+              }
+            } else {
+              var q = v.play();
+              if (q && q.catch) q.catch(function () {});
+            }
+          }
+        } else {
+          if (fig._timer) { window.clearTimeout(fig._timer); fig._timer = null; }
+          if (!v.paused) v.pause();
+          if (fig.dataset.locked === '1') delete fig.dataset.locked;
+        }
+      });
+    }
+
+    var queued = false;
+    function request() {
+      if (queued) return;
+      queued = true;
+      window.requestAnimationFrame(function () { queued = false; scan(); });
+    }
+    window.addEventListener('scroll', request, { passive: true });
+    window.addEventListener('resize', request);
+    document.addEventListener('visibilitychange', request);
+    scan();
+  })();
+</script>
+
+</body>
 </html>
