@@ -40,7 +40,7 @@
         <a href="#recognition">荣誉</a>
         <a href="certificates.html">证书</a>
         <a href="#contact">联系</a>
-        <a class="nav-resume" href="assets/docs/Liu-Jiaxin-Resume.pdf?v=20261014" target="_blank">
+        <a class="nav-resume" href="assets/docs/Liu-Jiaxin-Resume.pdf?v=20261101" target="_blank">
           简历
           <i data-lucide="arrow-up-right"></i>
         </a>
@@ -154,7 +154,7 @@
             <h2>ROS2 双臂<br />模仿学习与策略部署</h2>
           </div>
           <div class="project-meta">
-            <span>2026.08 - 2026.09</span>
+            <span>2026.08 – 2026.10</span>
             <span>ROS2 Jazzy / MuJoCo</span>
             <span>Apache-2.0 开源</span>
           </div>
@@ -351,8 +351,8 @@
             <h2>办公区自主导航<br />垃圾分类拾取与倾倒系统</h2>
           </div>
           <div class="project-meta">
-            <span>2024.12 - 2025.03</span>
-            <span>2026.02 - 至今</span>
+            <span>2024.12 – 2025.03</span>
+            <span>2026.03 – 2026.06</span>
             <span>ROS2 / Embedded AI</span>
           </div>
         </div>
@@ -623,25 +623,25 @@
         <div class="section-index">04 / EXPERIENCE</div>
         <div class="section-title reveal">
           <h2>实习经历</h2>
-          <p>在具身智能公司参与遥操作系统与灵巧手软件栈开发，负责从硬件接入到数据交付的完整链路。</p>
+          <p>在具身智能公司独立负责遥操作系统与执行端软件栈：从设备接入、IK 求解、机械臂与灵巧手控制，到仿真验证与数据交付的完整链路。</p>
         </div>
         <div class="project-story experience-story">
           <article class="story-lead reveal">
-            <p class="eyebrow dark">2026.08 - 至今 · 实习</p>
-            <h3>深圳原动力智能<br />机器人软件工程师</h3>
+            <p class="eyebrow dark">2026.08 - 2026.11 · 实习</p>
+            <h3>深圳原动力智能<br />机器人系统软件工程师</h3>
             <p>
-              参与具身智能数据采集链路建设：独立负责新版遥操作系统，并承担多款灵巧手的驱动开发与
-              运动重定向工作，产出的多模态示范数据直接支撑策略模型训练。
+              独立负责一套多输入源、多输出源的通用遥操作系统：覆盖设备接入、IK 求解、机械臂与灵巧手控制，
+              并接入 Isaac Sim 与 MuJoCo 做仿真验证；产出的多模态示范数据直接支撑策略模型训练。
             </p>
             <p class="eyebrow dark experience-stack-label">Stack</p>
             <ol class="hero-process experience-stack">
               <li>
                 <span>01</span>
-                <div><strong>INPUT</strong><small>Quest 3S · IO 数据手套</small></div>
+                <div><strong>INPUT</strong><small>Quest 3S · IO / Manus 手套</small></div>
               </li>
               <li>
                 <span>02</span>
-                <div><strong>ARM</strong><small>UR5 · AR5</small></div>
+                <div><strong>ROBOT</strong><small>AR5 · UR5 · RealMan · Astribot</small></div>
               </li>
               <li>
                 <span>03</span>
@@ -653,6 +653,10 @@
               </li>
               <li>
                 <span>05</span>
+                <div><strong>SIM</strong><small>Isaac Sim · MuJoCo</small></div>
+              </li>
+              <li>
+                <span>06</span>
                 <div><strong>DATA</strong><small>rosbag → 训练组</small></div>
               </li>
             </ol>
@@ -661,11 +665,11 @@
             <p class="eyebrow dark">What I Did</p>
             <p class="role-subtitle">主要工作</p>
             <ul class="check-list">
-              <li>独立搭建新版遥操作系统：以 Quest 3S 与 IO 数据手套为输入，遥操作 UR5/AR5 机械臂与 Wuji2 灵巧手，部署于 Jetson AGX Thor 边缘平台</li>
-              <li>设计硬件抽象层，支持 IO 外骨骼动捕服及多种机械臂、灵巧手型号的配置切换</li>
-              <li>负责 Sharpa、Wuji2 多款灵巧手的驱动开发与运动重定向（retargeting）</li>
-              <li>搭建遥操作仿真环境，基于 rosbag 录制多模态示范数据并交付训练组</li>
-              <li>维护旧版遥操作系统，完成 Docker 容器化部署、触觉反馈与灵巧手校准</li>
+              <li>独立搭建多输入源、多输出源的通用遥操作系统：输入侧兼容 Quest 3S、IO 动捕服／数据手套、Manus 手套，输出侧覆盖 AR5/UR5 机械臂、RealMan 与 Astribot 人形机器人及多款灵巧手，机型以配置方式切换</li>
+              <li>负责执行端驱动与控制：完成 Sharpa、Wuji2 灵巧手驱动与运动重定向（retargeting），以及 AR5 位置模式与轴空间阻抗（柔顺）控制、刚度整定</li>
+              <li>负责双臂 IK 方案选型与集成：采用 Pinocchio + Pink 的 QP 求解链路，将关节限位、速度与加速度约束纳入优化，双臂实时求解、控制周期 p99 约 0.3 ms</li>
+              <li>将遥操作系统接入 NVIDIA Isaac Sim 与 MuJoCo：以统一 JointState 接口替换内置虚拟执行端，实现真机与仿真同源控制</li>
+              <li>基于 rosbag 采集多模态示范数据交付训练组；维护旧版遥操作系统，完成 Docker 容器化部署、触觉反馈与灵巧手校准</li>
             </ul>
           </div>
         </div>
@@ -861,7 +865,7 @@
             <article class="reveal">
               <i data-lucide="network"></i>
               <h3>ROS2 系统</h3>
-              <p>多节点架构、Launch、TF2、DDS/QoS、ros2_control、Action、硬件接口</p>
+              <p>多节点架构、Launch、TF2、DDS/QoS、Action、硬件接口</p>
             </article>
             <article class="reveal">
               <i data-lucide="gamepad-2"></i>
@@ -870,8 +874,8 @@
             </article>
             <article class="reveal">
               <i data-lucide="hand"></i>
-              <h3>灵巧手与硬件适配</h3>
-              <p>Wuji2、Sharpa、驱动开发、运动重定向（retargeting）、UART / CAN、硬件抽象层</p>
+              <h3>执行端驱动与控制</h3>
+              <p>Wuji2 / Sharpa 驱动、运动重定向（retargeting）、AR5 位置与轴空间阻抗（柔顺）控制、刚度整定、Pinocchio / Pink IK、UART / CAN、硬件抽象层</p>
             </article>
             <article class="reveal">
               <i data-lucide="brain-circuit"></i>
@@ -896,7 +900,7 @@
             <article class="reveal">
               <i data-lucide="box"></i>
               <h3>机械与仿真</h3>
-              <p>SolidWorks、URDF、XACRO、Gazebo、MuJoCo、机械结构设计与整机集成</p>
+              <p>SolidWorks、URDF、XACRO、Gazebo、MuJoCo、Isaac Sim、机械结构设计与整机集成</p>
             </article>
             <article class="reveal">
               <i data-lucide="code-2"></i>
@@ -995,7 +999,7 @@
             </a>
             <a
               class="button button-outline-light"
-              href="assets/docs/Liu-Jiaxin-Resume.pdf?v=20261014"
+              href="assets/docs/Liu-Jiaxin-Resume.pdf?v=20261101"
               target="_blank"
             >
               下载简历
