@@ -924,7 +924,7 @@
     <div class="rail">
       <span class="num">01</span>
       <h2>实习</h2>
-      <p>深圳 · 具身智能<br />遥操作与执行端软件</p>
+      <p>深圳 · 具身智能<br />遥操作系统 · 执行端控制</p>
     </div>
 
     <div>
@@ -935,21 +935,21 @@
         </div>
 
         <div class="spec">
-          <div><dt>系统</dt><dd>多输入源、多输出源的通用遥操作系统，独立负责</dd></div>
+          <div><dt>系统</dt><dd>通用遥操作系统（多输入源 / 多输出源）· 独立负责</dd></div>
           <div><dt>输入</dt><dd>Quest 3S · IO 动捕服 / 数据手套 · Manus 手套</dd></div>
-          <div><dt>输出</dt><dd>AR5 / UR5 机械臂 · RealMan 与 Astribot 人形机器人 · Wuji2 / Sharpa 灵巧手</dd></div>
-          <div><dt>平台</dt><dd>Jetson AGX Thor · Docker · NVIDIA Isaac Sim / MuJoCo</dd></div>
+          <div><dt>输出</dt><dd>AR5 / UR5 机械臂 · RealMan 与 Astribot 人形机器人 · Sharpa / Wuji2 灵巧手</dd></div>
+          <div><dt>部署</dt><dd>Jetson AGX Thor 边缘平台 · Docker 容器化 · Isaac Sim / MuJoCo 仿真</dd></div>
         </div>
 
         <ul class="points">
-          <li><b>输入输出解耦</b>：重写硬件抽象层，机型以配置方式切换，新增设备只接适配层，不改主控流程。</li>
-          <li><b>执行端驱动与控制</b>：完成 Sharpa、Wuji2 灵巧手驱动与运动重定向（retargeting）；实现 AR5 位置模式与轴空间阻抗（柔顺）控制、刚度整定。</li>
-          <li><b>双臂 IK 选型与集成</b>：采用 Pinocchio + Pink 的 QP 求解链路，把关节限位、速度与加速度约束纳入优化，双臂实时求解、控制周期 p99 约 <b>0.3 ms</b>。</li>
-          <li><b>真机与仿真同源</b>：以统一的 JointState 接口替换内置虚拟执行端，把同一套输入与 IK 链路接入 Isaac Sim 与 MuJoCo。</li>
-          <li><b>数据交付</b>：基于 rosbag 采集多模态示范数据交付训练组；维护旧版系统，完成容器化部署、触觉反馈与灵巧手校准。</li>
+          <li><b>独立搭建通用遥操作系统</b>：把三类输入设备与机械臂、人形机器人、灵巧手统一接进同一套主控；重写硬件抽象层，机型以配置方式切换，新增设备只接适配层、不改主控流程。</li>
+          <li><b>执行端驱动与控制</b>：完成 Sharpa、Wuji2 灵巧手驱动与运动重定向（retargeting），实现 AR5 位置模式与轴空间阻抗（柔顺）控制、刚度整定。</li>
+          <li><b>双臂 IK 选型与集成</b>：采用 Pinocchio + Pink 的 QP 求解链路，将关节限位、速度与加速度约束纳入优化，双臂实时求解、控制周期 p99 约 <b>0.3 ms</b>。</li>
+          <li><b>真机与仿真同源</b>：以统一的 JointState 接口替换内置虚拟执行端，将同一套输入与 IK 链路接入 NVIDIA Isaac Sim 与 MuJoCo，驱动仿真中的机器人与灵巧手，支持姿态回放。</li>
+          <li><b>容器化部署与数据交付</b>：系统部署于 Jetson AGX Thor 边缘平台并完成 Docker 容器化；基于 rosbag 采集多模态示范数据交付训练组，维护旧版系统、触觉反馈与灵巧手校准。</li>
         </ul>
 
-        <p class="stack"><span>ROS2</span><span>Pinocchio / Pink</span><span>Isaac Sim</span><span>MuJoCo</span><span>Jetson AGX Thor</span><span>Docker</span></p>
+        <p class="stack"><span>ROS2</span><span>Pinocchio / Pink</span><span>Isaac Sim</span><span>MuJoCo</span><span>Jetson AGX Thor</span><span>Docker</span><span>Retargeting</span></p>
       </article>
     </div>
   </section>
